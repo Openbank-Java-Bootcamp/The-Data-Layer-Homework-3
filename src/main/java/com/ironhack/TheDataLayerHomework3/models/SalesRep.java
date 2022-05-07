@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
+
 
 @Getter
 @Setter
@@ -27,6 +29,7 @@ public class SalesRep {
 
     public SalesRep(String name) {
         this.name = name;
+        this.id = shortUUID();
     }
 }
 
