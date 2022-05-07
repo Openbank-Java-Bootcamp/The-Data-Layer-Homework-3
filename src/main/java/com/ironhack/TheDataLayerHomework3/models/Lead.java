@@ -1,23 +1,41 @@
-package com.ironhack.TheDataLayerHomework3.classes;
+package com.ironhack.TheDataLayerHomework3.models;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "lead")
 public class Lead {
-    private String name;
-    private Long phoneNumber;
-    private String email;
-    private String companyName;
+
+    @Id
+    @Column(name = "id")
     private int leadId;
 
-    public Lead(String name, Long phoneNumber, String email, String companyName) {
+    private String name;
+
+    @Column(name = "phone_number")
+    private Long phoneNumber;
+
+    private String email;
+
+    @Column(name = "company_name")
+    private String companyName;
+
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
+
+
+    public Lead(String name, Long phoneNumber, String email, String companyName, SalesRep salesRep) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.companyName = companyName;
+        this.salesRep = salesRep;
     }
 
     @Override
@@ -26,8 +44,5 @@ public class Lead {
                 "\n Email: %s, \n Company name: %s \n").formatted(leadId, name, phoneNumber, email, companyName);
 
     }
-
-
-
 
 }

@@ -1,6 +1,7 @@
-package com.ironhack.TheDataLayerHomework3.classes;
+package com.ironhack.TheDataLayerHomework3.models;
 
 import com.ironhack.TheDataLayerHomework3.enums.Industry;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -13,14 +14,25 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "account")
 public class Account {
-    Industry industry;
+
+    @Id
+    private String id;
+
+    @Column(name = "employee_count")
     int employeeCount;
+
+    Industry industry;
     String city;
     String country;
+
+    @OneToMany(mappedBy = "account")
     List<Contact> contactList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account")
     List<Opportunity> opportunityList = new ArrayList<>();
-    private String id;
 
     public Account(Industry industry, int employeeCount, String city, String country) {
         this.industry = industry;

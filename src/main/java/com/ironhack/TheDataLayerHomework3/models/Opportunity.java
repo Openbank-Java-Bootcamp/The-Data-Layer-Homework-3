@@ -1,8 +1,9 @@
-package com.ironhack.TheDataLayerHomework3.classes;
+package com.ironhack.TheDataLayerHomework3.models;
 
 import com.ironhack.TheDataLayerHomework3.enums.Product;
 import com.ironhack.TheDataLayerHomework3.enums.Status;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
@@ -11,12 +12,27 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "opportunity")
 public class Opportunity {
+
+    @Id
     private String id;
     private Product product;
     private int quantity;
-    private Contact decisionMaker;
     private Status status;
+
+    @OneToOne
+    @Column(name = "decision_maker")
+    private Contact decisionMaker;
+
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
     public Opportunity(Product product, int quantity, Contact contact, Status status) {
         this.id = shortUUID();

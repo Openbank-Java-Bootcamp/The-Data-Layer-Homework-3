@@ -1,10 +1,8 @@
 package com.ironhack.TheDataLayerHomework3.utils;
 
-import com.ironhack.TheDataLayerHomework3.classes.Opportunity;
-import com.ironhack.TheDataLayerHomework3.classes.Opportunity;
+import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
-import com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation;
 
 import java.util.Arrays;
 import java.util.HashSet;

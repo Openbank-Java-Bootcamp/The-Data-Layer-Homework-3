@@ -1,6 +1,6 @@
 package com.ironhack.TheDataLayerHomework3.navigation;
 
-import  com.ironhack.TheDataLayerHomework3.classes.Lead;
+import  com.ironhack.TheDataLayerHomework3.models.Lead;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,7 @@ class LeadNavigationTest {
        private Lead lead1 = new Lead();
     @BeforeEach //@BeforeAll
     public void setUp() {
+        //TODO add sales rep
         lead1 = new Lead( "Mike",956211567L,
                 "MikeMichael@EmersonProduceCo.com" , "Emerson Produce Co.", 1);
         currentLead=lead1;

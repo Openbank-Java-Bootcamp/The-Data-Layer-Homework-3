@@ -1,4 +1,4 @@
-package com.ironhack.TheDataLayerHomework3.classes;
+package com.ironhack.TheDataLayerHomework3.models;
 
 import org.junit.jupiter.api.BeforeAll;
 

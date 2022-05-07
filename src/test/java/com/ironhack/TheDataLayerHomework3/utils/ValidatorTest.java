@@ -1,8 +1,8 @@
 package com.ironhack.TheDataLayerHomework3.utils;
 
 
-import com.ironhack.TheDataLayerHomework3.classes.Contact;
-import com.ironhack.TheDataLayerHomework3.classes.Opportunity;
+import com.ironhack.TheDataLayerHomework3.models.Contact;
+import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.enums.Product;
 import com.ironhack.TheDataLayerHomework3.enums.Status;
 import com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation;
@@ -35,6 +35,7 @@ class ValidatorTest {
 
     @Test
     public void isValidOpportunityId_String_Boolean() {
+        //TODO add sales rep
         OpportunityNavigation.opportunityList.add(new Opportunity(Product.FLATBED, 21, new Contact("Mike",
                 956211567L, "MikeMichael@EmersonProduceCo.com", "Emerson Produce Co."),
                 Status.OPEN));

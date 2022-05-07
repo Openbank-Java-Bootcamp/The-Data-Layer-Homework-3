@@ -1,9 +1,9 @@
 package com.ironhack.TheDataLayerHomework3.navigation;
 
 
-import com.ironhack.TheDataLayerHomework3.classes.Contact;
-import com.ironhack.TheDataLayerHomework3.classes.Lead;
-import com.ironhack.TheDataLayerHomework3.classes.Opportunity;
+import com.ironhack.TheDataLayerHomework3.models.Contact;
+import com.ironhack.TheDataLayerHomework3.models.Lead;
+import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
@@ -43,7 +43,7 @@ public class LeadNavigation {
 
         String companyName = promptTextWithValidation("Insert the Company name", List.of(Validation.STRING));
 
-
+        //TODO add sales rep
         leadList.add(new Lead(newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, leadList.size() + 1));
 
         currentLead = leadList.get(leadList.size() - 1);

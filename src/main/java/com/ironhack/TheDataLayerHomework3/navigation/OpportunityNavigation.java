@@ -1,7 +1,7 @@
 package com.ironhack.TheDataLayerHomework3.navigation;
 
-import com.ironhack.TheDataLayerHomework3.classes.Contact;
-import com.ironhack.TheDataLayerHomework3.classes.Opportunity;
+import com.ironhack.TheDataLayerHomework3.models.Contact;
+import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.enums.Product;
 import com.ironhack.TheDataLayerHomework3.enums.Status;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;

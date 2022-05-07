@@ -1,5 +1,5 @@
 package com.ironhack.TheDataLayerHomework3.utils;
-import com.ironhack.TheDataLayerHomework3.classes.Lead;
+import com.ironhack.TheDataLayerHomework3.models.Lead;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
