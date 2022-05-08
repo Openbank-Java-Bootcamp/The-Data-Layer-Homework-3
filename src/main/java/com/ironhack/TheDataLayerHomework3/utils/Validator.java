@@ -1,8 +1,10 @@
 package com.ironhack.TheDataLayerHomework3.utils;
 
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
+import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
+import com.ironhack.TheDataLayerHomework3.navigation.SalesRepNavigation;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,6 +26,7 @@ public class Validator {
             case PHONE -> isValid = isValidPhoneNumber(input);
             case COMMAND -> isValid = isValidCommand(input);
             case OPPORTUNITY -> isValid = isValidOpportunityId(input);
+            case SALESREP -> isValid = isValidSalesRepId(input);
         }
 
         return isValid;
@@ -75,6 +78,16 @@ public class Validator {
                 if (opportunity.getId().equals(input)) return true;
             }
         Utils.printLikeError("Input a valid Opportunity ID");
+        return false;
+    }
+
+    public static Boolean isValidSalesRepId(String input) {
+
+        if (!SalesRepNavigation.salesRepList.isEmpty())
+            for (SalesRep salesRep : SalesRepNavigation.salesRepList) {
+                if (salesRep.getId().equals(input)) return true;
+            }
+        Utils.printLikeError("Input a valid Sales Rep ID");
         return false;
     }
 

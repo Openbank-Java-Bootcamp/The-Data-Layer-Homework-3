@@ -5,7 +5,9 @@ import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.enums.Product;
 import com.ironhack.TheDataLayerHomework3.enums.Status;
+import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation;
+import com.ironhack.TheDataLayerHomework3.navigation.SalesRepNavigation;
 import org.junit.jupiter.api.Test;
 
 import static com.ironhack.TheDataLayerHomework3.enums.Validation.PHONE;
@@ -35,13 +37,22 @@ class ValidatorTest {
 
     @Test
     public void isValidOpportunityId_String_Boolean() {
-        //TODO add sales rep
         OpportunityNavigation.opportunityList.add(new Opportunity(Product.FLATBED, 21, new Contact("Mike",
-                956211567L, "MikeMichael@EmersonProduceCo.com", "Emerson Produce Co."),
+                956211567L, "MikeMichael@EmersonProduceCo.com", "Emerson Produce Co.",
+                new SalesRep("Sarita Wilson")),
                 Status.OPEN));
         assertTrue(Validator.isValidOpportunityId(OpportunityNavigation.opportunityList.get(0).getId()));
         assertFalse(Validator.isValidOpportunityId("12133"));
         OpportunityNavigation.opportunityList.clear();
+    }
+
+    @Test
+    public void isValidSalesRepId_String_Boolean() {
+        SalesRepNavigation.salesRepList.add(new SalesRep("Sarita, Wilson"));
+
+        assertTrue(Validator.isValidSalesRepId(SalesRepNavigation.salesRepList.get(0).getId()));
+        assertFalse(Validator.isValidSalesRepId("12133"));
+        SalesRepNavigation.salesRepList.clear();
     }
 
 

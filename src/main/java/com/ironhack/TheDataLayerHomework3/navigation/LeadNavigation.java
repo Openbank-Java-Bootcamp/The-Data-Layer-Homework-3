@@ -1,35 +1,33 @@
 package com.ironhack.TheDataLayerHomework3.navigation;
 
 
+import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Lead;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
-import com.ironhack.TheDataLayerHomework3.enums.Validation;
+import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation.createOpportunity;
+import static com.ironhack.TheDataLayerHomework3.navigation.SalesRepNavigation.salesRepList;
 import static com.ironhack.TheDataLayerHomework3.utils.Input.promptTextWithValidation;
-import static com.ironhack.TheDataLayerHomework3.utils.Utils.clearConsole;
-import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
+import static com.ironhack.TheDataLayerHomework3.utils.Utils.*;
 
 public class LeadNavigation {
 
     public static List<Lead> leadList = new ArrayList<>();
-    static int counterId = 0;
     static Contact currentContact;
     static Lead currentLead;
     static Opportunity currentOpportunity;
-
-    static Map<String, Contact> contactMap = new HashMap<>();
     static List<Contact> contactList = new ArrayList<>();
 
     public static void createNewLead() {
+
+        //TODO add validation Sales Rep must be created before creating a Lead
 
         clearConsole();
         printHeading("Please input the following New Lead information");
@@ -43,8 +41,10 @@ public class LeadNavigation {
 
         String companyName = promptTextWithValidation("Insert the Company name", List.of(Validation.STRING));
 
-        //TODO add sales rep
-        leadList.add(new Lead(newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, leadList.size() + 1));
+        printSeparator(20);
+
+        //TODO add sales rep ID not full SalesRep obj ??
+        leadList.add(new Lead(leadList.size() + 1, newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, getSalesRepFromInputId()));
 
         currentLead = leadList.get(leadList.size() - 1);
 
@@ -55,6 +55,26 @@ public class LeadNavigation {
         Navigation.startNavigation();
     }
 
+    private static SalesRep getSalesRepFromInputId() {
+        SalesRep selectedSalesRep = null;
+
+        if (!salesRepList.isEmpty()) {
+            for (SalesRep salesRep : salesRepList) {
+                System.out.println("Sales Rep ID: " + salesRep.getId() + " Name: " + salesRep.getName());
+            }
+
+            //TODO add sales rep ID not full SalesRep obj ??
+            String salesRepId = promptTextWithValidation("Insert the Sales Rep ID", List.of(Validation.SALESREP));
+
+            for (SalesRep salesRep : salesRepList) {
+                if (salesRep.getId().equals(salesRepId)) selectedSalesRep = salesRep;
+            }
+        } else {
+            Utils.printLikeError("No Sales reps in the database, please create one");
+        }
+        return selectedSalesRep;
+    }
+
     public static void showLeads() {
         if (!leadList.isEmpty()) {
             Utils.printHeading("- Your current Leads - ");
@@ -62,15 +82,12 @@ public class LeadNavigation {
             for (Lead lead : leadList) {
                 if (!lead.getName().equals("Deleted Lead")) System.out.println(lead);
             }
-            Utils.anythingToContinue();
-            Utils.clearConsole();
-            Navigation.startNavigation();
         } else {
             Utils.printLikeError("No Leads in the database, please create one");
-            Utils.anythingToContinue();
-            Utils.clearConsole();
-            Navigation.startNavigation();
         }
+        Utils.anythingToContinue();
+        Utils.clearConsole();
+        Navigation.startNavigation();
     }
 
     public static void lookUpLeadID() {
@@ -79,15 +96,12 @@ public class LeadNavigation {
 
             System.out.println(leadList.get(input - 1).toString());
 
-            Utils.anythingToContinue();
-            Utils.clearConsole();
-            Navigation.startNavigation();
         } else {
             Utils.printLikeError("No Leads in the database, please create one");
-            Utils.anythingToContinue();
-            Utils.clearConsole();
-            Navigation.startNavigation();
         }
+        Utils.anythingToContinue();
+        Utils.clearConsole();
+        Navigation.startNavigation();
     }
 
 
@@ -111,11 +125,15 @@ public class LeadNavigation {
 
         if (!leadList.isEmpty() && hasDeletedLead) {
             clearConsole();
+
             int input = Input.promptIntWithCheck("Input the ID of the Lead you want to convert", leadList.size());
+
             Lead foundLead = leadList.get(input - 1);
 
             currentContact = createContact(foundLead);
+
             Utils.anythingToContinue();
+
             contactList.add(currentContact);
 
             currentOpportunity = createOpportunity(currentContact);
@@ -127,15 +145,12 @@ public class LeadNavigation {
 
             deleteLead();
 
-            Utils.anythingToContinue();
-            Utils.clearConsole();
-            Navigation.startNavigation();
         } else {
             Utils.printLikeError("No Leads in the database, please create one");
-            Utils.anythingToContinue();
-            Utils.clearConsole();
-            Navigation.startNavigation();
         }
+        Utils.anythingToContinue();
+        Utils.clearConsole();
+        Navigation.startNavigation();
     }
 
     public static void deleteLead() {

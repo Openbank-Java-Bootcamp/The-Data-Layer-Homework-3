@@ -31,5 +31,7 @@ public class SalesRep {
         this.name = name;
         this.id = shortUUID();
     }
+
+    //TODO toString
 }
 

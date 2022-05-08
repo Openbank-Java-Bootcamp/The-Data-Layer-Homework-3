@@ -40,7 +40,7 @@ public class OpportunityNavigation {
 
         Status status = OPEN;
 
-        Opportunity newOpportunity = new Opportunity(product, quantity, lead, status);
+        Opportunity newOpportunity = new Opportunity(product, quantity, lead, status, leadContact.getSalesRep());
         printHeading("\n New Opportunity: \n" + newOpportunity);
         opportunityList.add(newOpportunity);
         return newOpportunity;
