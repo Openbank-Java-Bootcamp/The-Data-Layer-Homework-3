@@ -1,5 +1,6 @@
 package com.ironhack.TheDataLayerHomework3.models;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,9 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "lead")
-public class Lead {
-
+@Table(name = "lead2")
+public class Lead2 {
     @Id
     @Column(name = "id")
     private int leadId;
@@ -30,7 +30,7 @@ public class Lead {
     private SalesRep salesRep;
 
 
-    public Lead(String name, Long phoneNumber, String email, String companyName, SalesRep salesRep) {
+    public Lead2(String name, Long phoneNumber, String email, String companyName, SalesRep salesRep) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -38,11 +38,11 @@ public class Lead {
         this.salesRep = salesRep;
     }
 
+
     @Override
     public String toString() {
         return ((char) 27 + "[36m" + "Lead ID %s " + (char) 27 + "[39m" + "\n Name: %s, \n Phone Number: %s, " +
                 "\n Email: %s, \n Company name: %s \n").formatted(leadId, name, phoneNumber, email, companyName);
 
     }
-
 }
