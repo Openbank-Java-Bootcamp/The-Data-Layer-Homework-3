@@ -18,6 +18,7 @@ public class Navigation {
             case LOOKUP_LEAD -> LeadNavigation.lookUpLeadID();
             case CONVERT_LEAD -> LeadNavigation.convertLead();
             case CHANGE_STATUS -> OpportunityNavigation.changeStatus();
+            case NEW_SALESREP -> OpportunityNavigation.changeStatus();
             case EXIT -> Navigation.exit();
         }
     }

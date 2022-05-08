@@ -1,10 +1,10 @@
-package com.ironhack.TheDataLayerHomework3;
+package com.ironhack.TheDataLayerHomework3.menu;
+
 
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.models.SalesRep;
-import com.ironhack.TheDataLayerHomework3.navigation.Navigation;
-import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
+import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,14 +15,16 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.clearConsole;
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
 
 @Component
-public class MainMenu {
+public class SalesRepMenu {
 
+
+    //same as @Autowired SalesRepRepository
     final private SalesRepRepository salesRepRepository;
 
-    //Dependency Injection AKA autowiring in the constructor
-    public MainMenu(SalesRepRepository salesRepRepository) {
+    public SalesRepMenu(SalesRepRepository salesRepRepository) {
         this.salesRepRepository = salesRepRepository;
     }
+
 
     public void menu() {
         int input = 0;
@@ -36,6 +38,7 @@ public class MainMenu {
 
         }
 
+        //TODO if 99 back
         System.exit(0);
     }
 
@@ -46,23 +49,28 @@ public class MainMenu {
 
         String newSalesRepName = promptTextWithValidation("Insert the SalesRep name", List.of(Validation.NAME));
 
-        var currentSalesRep = new SalesRep(newSalesRepName);
+        SalesRep currentSalesRep = new SalesRep(newSalesRepName);
 
-        salesRepRepository.save(currentSalesRep);
+        SalesRep storedSalesRep = salesRepRepository.save(currentSalesRep);
 
         System.out.println("Successfully created Sales Rep");
+        System.out.println(storedSalesRep);
 
+        Utils.anythingToContinue();
+        Utils.clearConsole();
     }
 
-    public void showAllSalesRep(){
+    public void showAllSalesRep() {
 
         clearConsole();
 
         var salesRepList = salesRepRepository.findAll();
 
-        for (SalesRep salesRep : salesRepList){
+        for (SalesRep salesRep : salesRepList) {
             System.out.println(salesRep);
         }
 
+        Utils.anythingToContinue();
+        Utils.clearConsole();
     }
 }

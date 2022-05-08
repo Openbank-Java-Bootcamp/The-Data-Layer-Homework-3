@@ -1,6 +1,6 @@
 package com.ironhack.TheDataLayerHomework3.navigation;
 
-import  com.ironhack.TheDataLayerHomework3.models.Lead;
+import com.ironhack.TheDataLayerHomework3.models.Lead;
 import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

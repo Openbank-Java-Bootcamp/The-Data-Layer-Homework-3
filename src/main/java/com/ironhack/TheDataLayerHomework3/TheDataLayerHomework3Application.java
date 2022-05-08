@@ -1,6 +1,6 @@
 package com.ironhack.TheDataLayerHomework3;
 
-import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
+import com.ironhack.TheDataLayerHomework3.menu.MainMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
