@@ -1,10 +1,9 @@
 package com.ironhack.TheDataLayerHomework3.navigation;
-
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
-import com.ironhack.TheDataLayerHomework3.models.Lead;
-import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +12,13 @@ import static com.ironhack.TheDataLayerHomework3.utils.Input.promptTextWithValid
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.clearConsole;
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
 
+@EnableJpaRepositories(basePackages = "com.ironhack.TheDataLayerHomework3.repository")
 public class SalesRepNavigation {
 
     static SalesRep currentSalesRep;
 
     public static List<SalesRep> salesRepList = new ArrayList<>();
+
 
 
     public static void createNewSalesRep() {
@@ -30,6 +31,7 @@ public class SalesRepNavigation {
         currentSalesRep = new SalesRep(newSalesRepName);
 
         salesRepList.add(currentSalesRep);
+       // SalesRepService.test(currentSalesRep);
 
         System.out.println(salesRepList.get(salesRepList.size() - 1).toString());
 

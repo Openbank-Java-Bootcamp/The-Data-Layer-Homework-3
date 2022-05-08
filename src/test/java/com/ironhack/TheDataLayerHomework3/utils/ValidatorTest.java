@@ -37,9 +37,10 @@ class ValidatorTest {
 
     @Test
     public void isValidOpportunityId_String_Boolean() {
+        SalesRep salesRep = new SalesRep("Sarita Wilson");
         OpportunityNavigation.opportunityList.add(new Opportunity(Product.FLATBED, 21, new Contact("Mike",
                 956211567L, "MikeMichael@EmersonProduceCo.com", "Emerson Produce Co.",
-                new SalesRep("Sarita Wilson")),
+                salesRep),
                 Status.OPEN));
         assertTrue(Validator.isValidOpportunityId(OpportunityNavigation.opportunityList.get(0).getId()));
         assertFalse(Validator.isValidOpportunityId("12133"));

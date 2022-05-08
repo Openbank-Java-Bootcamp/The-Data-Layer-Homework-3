@@ -11,22 +11,44 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "contact")
-public class Contact extends Lead {
+public class Contact {
 
     @Id
     private String id;
+
+    private String name;
+
+    @Column(name = "phone_number")
+    private Long phoneNumber;
+
+    private String email;
+
+    @Column(name = "company_name")
+    private String companyName;
+
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
 
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
     public Contact(String name, Long phoneNumber, String email, String companyName, SalesRep salesRep) {
-        super(name, phoneNumber, email, companyName, salesRep);
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.companyName = companyName;
+        this.salesRep = salesRep;
         this.id = shortUUID();
     }
 
     public Contact(Lead lead) {
-        super(lead.getName(), lead.getPhoneNumber(), lead.getEmail(), lead.getCompanyName(), lead.getSalesRep());
+        this.name = lead.getName();
+        this.phoneNumber = lead.getPhoneNumber();
+        this.email = lead.getEmail();
+        this.companyName = lead.getCompanyName();
+        this.salesRep = lead.getSalesRep();
         this.id = shortUUID();
     }
 

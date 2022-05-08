@@ -25,6 +25,9 @@ public class SalesRep {
     private List<Lead> leadList;
 
     @OneToMany(mappedBy = "salesRep")
+    private List<Contact> contactList;
+
+    @OneToMany(mappedBy = "salesRep")
     private List<Opportunity> opportunityList;
 
     public SalesRep(String name) {
@@ -32,6 +35,12 @@ public class SalesRep {
         this.id = shortUUID();
     }
 
-    //TODO toString
+    @Override
+    public String toString() {
+        return "SalesRep{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
 

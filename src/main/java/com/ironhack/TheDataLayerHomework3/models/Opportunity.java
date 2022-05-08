@@ -23,7 +23,6 @@ public class Opportunity {
     private Status status;
 
     @OneToOne
-    @Column(name = "decision_maker")
     private Contact decisionMaker;
 
     @ManyToOne
@@ -34,13 +33,13 @@ public class Opportunity {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    public Opportunity(Product product, int quantity, Contact contact, Status status, SalesRep salesRep) {
+    public Opportunity(Product product, int quantity, Contact contact, Status status) {
         this.id = shortUUID();
         this.product = product;
         this.quantity = quantity;
         this.decisionMaker = contact ;
         this.status = status;
-        this.salesRep = salesRep;
+        this.salesRep = contact.getSalesRep();
     }
 
     public String getId() {

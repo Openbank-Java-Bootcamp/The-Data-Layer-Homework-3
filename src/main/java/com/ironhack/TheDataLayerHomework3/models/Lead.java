@@ -9,8 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "lead2")
-public class Lead2 {
+@Table(name = "lead_table")
+public class Lead {
     @Id
     @Column(name = "id")
     private int leadId;
@@ -30,7 +30,7 @@ public class Lead2 {
     private SalesRep salesRep;
 
 
-    public Lead2(String name, Long phoneNumber, String email, String companyName, SalesRep salesRep) {
+    public Lead(String name, Long phoneNumber, String email, String companyName, SalesRep salesRep) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
