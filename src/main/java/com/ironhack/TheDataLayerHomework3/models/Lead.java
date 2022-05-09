@@ -13,6 +13,7 @@ import lombok.*;
 public class Lead {
     @Id
     @Column(name = "id")
+    //TODO @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int leadId;
 
     private String name;
