@@ -18,4 +18,3 @@ The LLIJ Team: Lucía Sánchez, Lisa Medina, Italia Herrera and Josefina Cresta.
 ### Instructions 
 
 
-<img src="/home/user/Desktop/OPENCAMP/HOMEWORK3/The-Data-Layer-Homework-3/UseCaseDiagramHW3.drawio.png" width="400" height="200"/>
