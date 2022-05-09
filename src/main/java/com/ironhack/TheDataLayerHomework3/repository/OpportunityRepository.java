@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OpportunityRepository  extends JpaRepository<Opportunity, String> {
     /*By SalesRep*/
-
     //A count of all Opportunities by SalesRep can be displayed by typing “Report Opportunity by SalesRep”
 
     //A count of all CLOSED_WON Opportunities by SalesRep can be displayed by typing “Report CLOSED-WON by SalesRep”
@@ -15,7 +14,6 @@ public interface OpportunityRepository  extends JpaRepository<Opportunity, Strin
     //A count of all CLOSED_LOST Opportunities by SalesRep can be displayed by typing “Report CLOSED-LOST by SalesRep”
 
     //A count of all OPEN Opportunities by SalesRep can be displayed by typing “Report OPEN by SalesRep”
-
     /*           */
 
     /*By Product*/
@@ -50,7 +48,6 @@ public interface OpportunityRepository  extends JpaRepository<Opportunity, Strin
 
 
     /*By Industry*/
-
     //A count of all Opportunities by industry can be displayed by typing “Report Opportunity by Industry”
     //A count of all CLOSED_WON Opportunities by industry can be displayed by typing “Report CLOSED-WON by Industry”
     //A count of all CLOSED_LOST Opportunities by industry can be displayed by typing “Report CLOSED-LOST by Industry”

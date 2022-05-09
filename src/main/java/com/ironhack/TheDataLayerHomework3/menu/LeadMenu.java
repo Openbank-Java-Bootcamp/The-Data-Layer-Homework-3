@@ -1,10 +1,11 @@
 package com.ironhack.TheDataLayerHomework3.menu;
 
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
+import com.ironhack.TheDataLayerHomework3.models.Account;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Lead;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
-import com.ironhack.TheDataLayerHomework3.models.SalesRep;
+import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
 import com.ironhack.TheDataLayerHomework3.repository.ContactRepository;
 import com.ironhack.TheDataLayerHomework3.repository.LeadRepository;
 import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
@@ -22,18 +23,24 @@ public class LeadMenu {
     final private LeadRepository leadRepository;
     final private SalesRepRepository salesRepRepository;
     final private ContactRepository contactRepository;
+    final private AccountRepository accountRepository;
     final private Input inputAutowired;
     final private OpportunityMenu opportunityMenu;
+    final private SalesRepMenu salesRepMenu;
     private Lead currentLead;
-    //final private AccountMenu accountMenu;
+
+    final private AccountMenu accountMenu;
 
     public LeadMenu(LeadRepository leadRepository, SalesRepRepository salesRepRepository, ContactRepository contactRepository,
-                    Input inputAutowired, OpportunityMenu opportunityMenu) {
+                    AccountRepository accountRepository, Input inputAutowired, OpportunityMenu opportunityMenu, SalesRepMenu salesRepMenu, AccountMenu accountMenu) {
         this.leadRepository = leadRepository;
         this.salesRepRepository = salesRepRepository;
         this.contactRepository = contactRepository;
+        this.accountRepository = accountRepository;
         this.inputAutowired = inputAutowired;
         this.opportunityMenu = opportunityMenu;
+        this.salesRepMenu = salesRepMenu;
+        this.accountMenu = accountMenu;
     }
 
 
@@ -70,7 +77,7 @@ public class LeadMenu {
             printSeparator(20);
 
             List<Lead> leadList = leadRepository.findAll();
-            currentLead = (new Lead(leadList.size() + 1, newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, getSalesRepFromInputId()));
+            currentLead = (new Lead(leadList.size() + 1, newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, salesRepMenu.getSalesRepFromInputId()));
             leadRepository.save(currentLead);
 
             System.out.println(currentLead.toString());
@@ -82,25 +89,6 @@ public class LeadMenu {
         }
     }
 
-    public SalesRep getSalesRepFromInputId() {
-        SalesRep selectedSalesRep = null;
-        var salesRepList = salesRepRepository.findAll();
-
-        if (!salesRepList.isEmpty()) {
-            for (SalesRep salesRep : salesRepList) {
-                System.out.println("Sales Rep ID: " + salesRep.getId() + " Name: " + salesRep.getName());
-            }
-
-            String salesRepId = inputAutowired.promptTextWithValidation("Insert the Sales Rep ID", List.of(Validation.SALESREP));
-
-            for (SalesRep salesRep : salesRepList) {
-                if (salesRep.getId().equals(salesRepId)) selectedSalesRep = salesRep;
-            }
-        } else {
-            Utils.printLikeError("No Sales reps in the database, please create one");
-        }
-        return selectedSalesRep;
-    }
 
     public void showLeads() {
         clearConsole();
@@ -160,7 +148,20 @@ public class LeadMenu {
             //deleteLead();
             anythingToContinue();
 
-            //accountMenu.createAccount(currentContact, currentOpportunity);
+            int inputAccount = inputAutowired.promptIntWithValidation("¿Would you like to create a new Account?" +
+                    "\n(1) Yes! \n(2) No, I want to add it to an existing one ", 2);
+            if(inputAccount==1) accountMenu.createAccount(currentContact, currentOpportunity);
+            else if (inputAccount==2) {
+                accountMenu.showAllAccounts();
+                String accountId = inputAutowired.promptTextWithValidation("Insert the Account ID", List.of(Validation.ACCOUNT));
+
+                Account selectedAccount = accountRepository.findById(accountId).get();
+                //TODO selectedAccountID
+                currentContact.setAccount(selectedAccount);
+                selectedAccount.getContactList().add(currentContact);
+                accountRepository.save(selectedAccount);
+
+            }
 
         } else {
             Utils.printLikeError("No Leads in the database, please create one");

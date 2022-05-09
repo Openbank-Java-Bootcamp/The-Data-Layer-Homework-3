@@ -1,8 +1,10 @@
 package com.ironhack.TheDataLayerHomework3.utils;
 
+import com.ironhack.TheDataLayerHomework3.models.Account;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
+import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
 import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ public class Validator {
 
     @Autowired
     SalesRepRepository salesRepRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
     public boolean applyValidation(Validation validation, String input) {
         boolean isValid = false;
@@ -30,6 +34,7 @@ public class Validator {
             case COMMAND -> isValid = isValidCommand(input);
             case OPPORTUNITY -> isValid = isValidOpportunityId(input);
             case SALESREP -> isValid = isValidSalesRepId(input);
+            case ACCOUNT -> isValid = isValidAccountId(input);
         }
 
         return isValid;
@@ -90,6 +95,15 @@ public class Validator {
         if (foundSalesRep.isPresent()) return true;
 
         Utils.printLikeError("Input a valid Sales Rep ID");
+        return false;
+    }
+
+    public Boolean isValidAccountId(String input) {
+        Optional<Account> foundAccount = accountRepository.findById(input);
+
+        if (foundAccount.isPresent()) return true;
+
+        Utils.printLikeError("Input a valid Account ID");
         return false;
     }
 
