@@ -1,6 +1,8 @@
 package com.ironhack.TheDataLayerHomework3.utils;
 
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
@@ -8,10 +10,12 @@ import java.util.Scanner;
 
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
 
-
+@Component
 public class Input {
     public static Scanner scanner = new Scanner(System.in);
 
+    @Autowired
+    Validator validator;
 
     /**
      * Input string with validations
@@ -20,7 +24,7 @@ public class Input {
      * @param validations enums of validations
      * @return
      */
-    public static String promptTextWithValidation(String prompt, List<Validation> validations) {
+    public String promptTextWithValidation(String prompt, List<Validation> validations) {
         String input = null;
         boolean isValid = false;
 
@@ -31,7 +35,7 @@ public class Input {
             isValid = true;
 
             for (Validation validation : validations) {
-                if (!Validator.applyValidation(validation, input)) {
+                if (!validator.applyValidation(validation, input)) {
                     isValid = false;
                 }
             }
@@ -40,7 +44,7 @@ public class Input {
         return input;
     }
 
-    public static int promptIntWithValidation(String prompt, int userChoices) {
+    public int promptIntWithValidation(String prompt, int userChoices) {
         int input = 0;
         boolean isValid = false;
 
@@ -64,7 +68,7 @@ public class Input {
 
 
 
-    public static int promptIntWithCheck( String prompt, int userChoices) {
+    public int promptIntWithCheck( String prompt, int userChoices) {
         //va en header lo que ve el jugador y attribute
         boolean attributeSet = false;
         int whatWeAreSetting = 0;

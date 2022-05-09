@@ -17,29 +17,6 @@ public class Utils {
         System.out.print((char) 27 + "[39m");
     }
 
-    /**
-     * Method to catch errors from user int input
-     *
-     * @param prompt      will be the string that appears in CRM
-     * @param userChoices maximum number of choices the user has
-     * @return the number the user chose
-     */
-    public static int readInt(String prompt, int userChoices) {
-        int input;
-
-        do {
-            System.out.println(prompt);
-            try {
-                input = Integer.parseInt(scanner.nextLine());
-            } catch (Exception e) {
-                input = -1;
-                printLikeError("Please enter a valid number!");
-            }
-        } while (input < 1 || input > userChoices);
-        return input;
-    }
-
-
     public static void clearConsole() {
         for (int i = 0; i < 15; i++) {
             System.out.println();

@@ -2,20 +2,23 @@ package com.ironhack.TheDataLayerHomework3.utils;
 
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.models.SalesRep;
-import com.ironhack.TheDataLayerHomework3.navigation.OpportunityNavigation;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
-import com.ironhack.TheDataLayerHomework3.navigation.SalesRepNavigation;
+import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@Component
 public class Validator {
 
-    public static boolean applyValidation(Validation validation, String input) {
+    @Autowired
+    SalesRepRepository salesRepRepository;
+
+    public boolean applyValidation(Validation validation, String input) {
         boolean isValid = false;
 
         switch (validation) {
@@ -32,7 +35,7 @@ public class Validator {
         return isValid;
     }
 
-    public static Boolean isValidCountryName(String input) {
+    public Boolean isValidCountryName(String input) {
 
         Set<String> countries = new HashSet<>(Arrays.stream(COUNTRIES_ARR).map(String::toLowerCase).collect(Collectors.toList()));
 
@@ -45,7 +48,7 @@ public class Validator {
 
     }
 
-    public static Boolean isValidName(String name) {
+    public Boolean isValidName(String name) {
         Pattern pattern = Pattern.compile("^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+\\s[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$");
         Matcher matcher = pattern.matcher(name);
 
@@ -57,7 +60,7 @@ public class Validator {
         }
     }
 
-    public static Boolean isValidString(String input) {
+    public Boolean isValidString(String input) {
 
         String[] noStringChar = {"%", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "/", "!", "(", ")", "+", "*", "<", ">"};
 
@@ -71,27 +74,26 @@ public class Validator {
         return false;
     }
 
-    public static Boolean isValidOpportunityId(String input) {
+    public Boolean isValidOpportunityId(String input) {
 
-        if (!OpportunityNavigation.opportunityList.isEmpty())
-            for (Opportunity opportunity : OpportunityNavigation.opportunityList) {
-                if (opportunity.getId().equals(input)) return true;
-            }
-        Utils.printLikeError("Input a valid Opportunity ID");
+//        if (!OpportunityNavigation.opportunityList.isEmpty())
+//            for (Opportunity opportunity : OpportunityNavigation.opportunityList) {
+//                if (opportunity.getId().equals(input)) return true;
+//            }
+//        Utils.printLikeError("Input a valid Opportunity ID");
         return false;
     }
 
-    public static Boolean isValidSalesRepId(String input) {
+    public Boolean isValidSalesRepId(String input) {
+        Optional<SalesRep> foundSalesRep = salesRepRepository.findById(input);
 
-        if (!SalesRepNavigation.salesRepList.isEmpty())
-            for (SalesRep salesRep : SalesRepNavigation.salesRepList) {
-                if (salesRep.getId().equals(input)) return true;
-            }
+        if (foundSalesRep.isPresent()) return true;
+
         Utils.printLikeError("Input a valid Sales Rep ID");
         return false;
     }
 
-    public static Boolean isValidEmail(String email) {
+    public Boolean isValidEmail(String email) {
         Pattern pattern = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
         //Pattern pattern = Pattern.compile("^(.+)@(\\S+)$");
@@ -105,7 +107,7 @@ public class Validator {
         }
     }
 
-    public static Boolean isValidCommand(String input) {
+    public Boolean isValidCommand(String input) {
 
         input = input.toLowerCase().trim();
 
@@ -129,7 +131,7 @@ public class Validator {
         return false;
     }
 
-    public static Boolean isValidPhoneNumber(String input) {
+    public Boolean isValidPhoneNumber(String input) {
 
         Pattern pattern = Pattern.compile(
                 "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
@@ -146,7 +148,7 @@ public class Validator {
         }
     }
 
-    public static final String[] COUNTRIES_ARR = new String[]{"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
+    public final String[] COUNTRIES_ARR = new String[]{"Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
             "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria",
             "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin",
             "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegowina", "Botswana", "Bouvet Island", "Brazil",
