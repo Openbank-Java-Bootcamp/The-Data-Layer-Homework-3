@@ -6,4 +6,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LeadRepository  extends JpaRepository<Lead, Integer> {
+
+    /*By SalesRep*/
+    //A count of Leads by SalesRep can be displayed by typing “Report Lead by SalesRep”
+    Integer
+
+
 }
