@@ -5,10 +5,7 @@ import com.ironhack.TheDataLayerHomework3.models.Account;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Lead;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
-import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
-import com.ironhack.TheDataLayerHomework3.repository.ContactRepository;
-import com.ironhack.TheDataLayerHomework3.repository.LeadRepository;
-import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
+import com.ironhack.TheDataLayerHomework3.repository.*;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
 import org.springframework.stereotype.Component;
@@ -24,17 +21,19 @@ public class LeadMenu {
     final private SalesRepRepository salesRepRepository;
     final private ContactRepository contactRepository;
     final private AccountRepository accountRepository;
+    final private OpportunityRepository opportunityRepository;
     final private Input inputAutowired;
     final private OpportunityMenu opportunityMenu;
     final private SalesRepMenu salesRepMenu;
     final private AccountMenu accountMenu;
 
     public LeadMenu(LeadRepository leadRepository, SalesRepRepository salesRepRepository, ContactRepository contactRepository,
-                    AccountRepository accountRepository, Input inputAutowired, OpportunityMenu opportunityMenu, SalesRepMenu salesRepMenu, AccountMenu accountMenu) {
+                    AccountRepository accountRepository, OpportunityRepository opportunityRepository, Input inputAutowired, OpportunityMenu opportunityMenu, SalesRepMenu salesRepMenu, AccountMenu accountMenu) {
         this.leadRepository = leadRepository;
         this.salesRepRepository = salesRepRepository;
         this.contactRepository = contactRepository;
         this.accountRepository = accountRepository;
+        this.opportunityRepository = opportunityRepository;
         this.inputAutowired = inputAutowired;
         this.opportunityMenu = opportunityMenu;
         this.salesRepMenu = salesRepMenu;
@@ -147,34 +146,57 @@ public class LeadMenu {
 
             Opportunity currentOpportunity = opportunityMenu.createOpportunity(currentContact);
 
+            createAccountWithContactAndLead(currentContact, currentOpportunity);
+
+
             deleteLead(foundLead);
             anythingToContinue();
 
-            int inputAccount = inputAutowired.promptIntWithValidation("¿Would you like to create a new Account?" +
-                    "\n(1) Yes! \n(2) No, I want to add it to an existing one ", 2);
-
-            if (inputAccount == 1) accountMenu.createAccount(currentContact, currentOpportunity);
-
-            else if (inputAccount == 2) {
-
-                accountMenu.showAllAccounts();
-
-                String accountId = inputAutowired.promptTextWithValidation("Insert the Account ID", List.of(Validation.ACCOUNT));
-
-                Account selectedAccount = accountRepository.findById(accountId).get();
-                //TODO selectedAccountID --- aquí es donde peta creo
-                currentContact.setAccount(selectedAccount);
-                selectedAccount.getContactList().add(currentContact);
-                accountRepository.save(selectedAccount);
-
-            }
 
         } else {
             Utils.printLikeError("No Leads in the database, please create one");
         }
-        Utils.anythingToContinue();
+//        Utils.anythingToContinue();
         Utils.clearConsole();
     }
+
+
+    public void createAccountWithContactAndLead(Contact currentContact, Opportunity currentOpportunity) {
+        int inputAccount = inputAutowired.promptIntWithValidation("¿Would you like to create a new Account?" +
+                "\n(1) Yes! \n(2) No, I want to add it to an existing one ", 2);
+
+        if (inputAccount == 1) {
+            Account createdAccount = accountMenu.createAccount(currentContact, currentOpportunity);
+
+            currentContact.setAccount(createdAccount);
+            contactRepository.save(currentContact);
+
+            currentOpportunity.setAccount(createdAccount);
+            opportunityRepository.save(currentOpportunity);
+        }
+
+        else if (inputAccount == 2) {
+
+            accountMenu.showAllAccounts();
+
+            String accountId = inputAutowired.promptTextWithValidation("Insert the Account ID", List.of(Validation.ACCOUNT));
+
+            Account selectedAccount = accountRepository.findById(accountId).get();
+
+            currentContact.setAccount(selectedAccount);
+            contactRepository.save(currentContact);
+
+            currentOpportunity.setAccount(selectedAccount);
+            opportunityRepository.save(currentOpportunity);
+
+//                List<Contact> contactList = selectedAccount.getContactList();
+//                contactList.add(currentContact);
+
+            accountRepository.save(selectedAccount);
+
+        }
+    }
+
 
     public Contact createContact(Lead lead) {
         Contact createdContact = null;

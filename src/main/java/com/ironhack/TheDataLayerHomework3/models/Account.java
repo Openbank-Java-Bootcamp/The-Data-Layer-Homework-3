@@ -28,7 +28,7 @@ public class Account {
     String city;
     String country;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     List<Contact> contactList = new ArrayList<>();
 
     @OneToMany(mappedBy = "account")

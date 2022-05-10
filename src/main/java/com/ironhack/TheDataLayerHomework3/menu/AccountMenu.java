@@ -33,7 +33,7 @@ public class AccountMenu {
      * @param contact
      * @param opportunity
      */
-    public void createAccount(Contact contact, Opportunity opportunity) {
+    public Account createAccount(Contact contact, Opportunity opportunity) {
         Industry industry = null;
 
         clearConsole();
@@ -55,6 +55,8 @@ public class AccountMenu {
         accountRepository.save(newAccount);
 
         printHeading("\n Successfully created: \n"+ newAccount);
+
+        return newAccount;
     }
 
 
