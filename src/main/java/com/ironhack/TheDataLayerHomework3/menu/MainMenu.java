@@ -16,6 +16,9 @@ public class MainMenu {
     LeadMenu leadMenu;
 
     @Autowired
+    OpportunityMenu opportunityMenu;
+
+    @Autowired
     ReportMenu reportMenu;
 
     @Autowired
@@ -28,12 +31,16 @@ public class MainMenu {
         while (input != 99) {
 
             clearConsole();
-            input = inputAutowired.promptIntWithValidation("(1) Sales Rep Menu \n(2) Lead Menu \n(3) Report Menu " +
+            input = inputAutowired.promptIntWithValidation("(1) Sales Rep Menu " +
+                    "\n(2) Lead Menu " +
+                    "\n(3) Opportunity Status Menu " +
+                    "\n(4) Report Menu " +
                     "\n(99) Exit", 99);
 
             if (input == 1) salesRepMenu.menu();
             if (input == 2) leadMenu.menu();
-            if (input == 3) reportMenu.menu();
+            if (input == 3) opportunityMenu.changeStatus();
+            if (input == 4) reportMenu.menu();
         }
 
         System.exit(0);

@@ -59,6 +59,7 @@ public class ReportMenu {
     }
 
     private void reportOpportunityBySalesRepAndStatus() {
+        clearConsole();
         SalesRep salesRep = salesRepMenu.getSalesRepFromInputId();
         printHeading(" \n Choose the status for opportunity " + " \n ");
         System.out.println("(1) Report OPEN by SalesRep");

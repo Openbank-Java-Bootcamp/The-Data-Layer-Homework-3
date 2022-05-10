@@ -2,19 +2,22 @@ package com.ironhack.TheDataLayerHomework3.menu;
 
 
 import com.ironhack.TheDataLayerHomework3.enums.Product;
-import com.ironhack.TheDataLayerHomework3.enums.Status;
+import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
+import com.ironhack.TheDataLayerHomework3.utils.Utils;
 import org.springframework.stereotype.Component;
 
-import static com.ironhack.TheDataLayerHomework3.enums.Status.OPEN;
-import static com.ironhack.TheDataLayerHomework3.utils.Utils.clearConsole;
-import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
+import java.util.List;
+
+import static com.ironhack.TheDataLayerHomework3.enums.Status.*;
+import static com.ironhack.TheDataLayerHomework3.utils.Utils.*;
 
 @Component
 public class OpportunityMenu {
+
     final private Input inputAutowired;
     final private OpportunityRepository opportunityRepository;
 
@@ -54,66 +57,57 @@ public class OpportunityMenu {
         System.out.println("(2) FLATBED");
         System.out.println("(3) BOX");
     }
+
+    public void changeStatus() {
+
+        List<Opportunity> opportunityList = opportunityRepository.findAll();
+
+        if (!opportunityList.isEmpty()) {
+            Opportunity foundOpportunity = null;
+            int newInput;
+
+            for (Opportunity opportunity : opportunityList) {
+                System.out.println("Opportunity ID: " + opportunity.getId() + " -> Decision Maker: " +
+                        opportunity.getDecisionMaker().getName());
+            }
+
+            String input = inputAutowired.promptTextWithValidation("Input the ID of the Opportunity to change status",
+                    List.of(Validation.OPPORTUNITY));
+
+            foundOpportunity = opportunityRepository.findById(input).get();
+
+            printStatusMenu(foundOpportunity.getId());
+            newInput = inputAutowired.promptIntWithValidation("-> ", 3);
+
+            if (newInput == 1) {
+                foundOpportunity.setStatus(OPEN);
+            } else if (newInput == 2) {
+                foundOpportunity.setStatus(CLOSED_WON);
+            } else if (newInput == 3) {
+                foundOpportunity.setStatus(CLOSED_LOST);
+            }
+
+            opportunityRepository.save(foundOpportunity);
+
+
+            printHeading("\nSuccessfully updated Opportunity Status: \n " + foundOpportunity);
+
+            anythingToContinue();
+            clearConsole();
+
+        } else {
+            Utils.printLikeError("No Opportunities in the database, please create one");
+            anythingToContinue();
+            Utils.clearConsole();
+        }
+
+    }
+
+
+    public void printStatusMenu(String id) {
+        printHeading(" \n Choose the status for opportunity " + id + " \n ");
+        System.out.println("(1) OPEN");
+        System.out.println("(2) CLOSED WON");
+        System.out.println("(3) CLOSED LOST");
+    }
 }
-
-
-
-
-//    public void changeStatus() {
-//
-//        if (!opportunityList.isEmpty()) {
-//            Opportunity foundOpportunity = null;
-//            int newInput;
-//
-//            for (Opportunity opportunity : opportunityList) {
-//                System.out.println("Opportunity ID: " + opportunity.getId() + " -> Decision Maker: " +
-//                        opportunity.getDecisionMaker().getName());
-//            }
-//
-//            String input = Input.promptTextWithValidation("Input the ID of the Opportunity to change status",
-//                    List.of(Validation.OPPORTUNITY));
-//
-//
-//            for (Opportunity opportunity : opportunityList) {
-//                if (input.equals(opportunity.getId())) {
-//                    foundOpportunity = opportunity;
-//
-//                    printStatusMenu(foundOpportunity.getId());
-//                    newInput = promptIntWithValidation("-> ", 3);
-//
-//                    if (newInput == 1) {
-//                        foundOpportunity.setStatus(OPEN);
-//                    } else if (newInput == 2) {
-//                        foundOpportunity.setStatus(CLOSED_WON);
-//                    } else if (newInput == 3) {
-//                        foundOpportunity.setStatus(CLOSED_LOST);
-//                    }
-//
-//                    printHeading("\nSuccessfully updated Opportunity Status: \n " + foundOpportunity);
-//
-//                    Utils.anythingToContinue();
-//                    Utils.clearConsole();
-//                    Navigation.startNavigation();
-//                }
-//            }
-//
-//
-//        } else {
-//            Utils.printLikeError("No Opportunities in the database, please create one");
-//            Utils.anythingToContinue();
-//            Utils.clearConsole();
-//            Navigation.startNavigation();
-//        }
-//
-//    }
-//
-//
-
-//
-//
-//    public void printStatusMenu(String id) {
-//        printHeading(" \n Choose the status for opportunity " + id + " \n ");
-//        System.out.println("(1) OPEN");
-//        System.out.println("(2) CLOSED WON");
-//        System.out.println("(3) CLOSED LOST");
-//    }
