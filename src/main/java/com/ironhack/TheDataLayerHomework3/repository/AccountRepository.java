@@ -1,10 +1,6 @@
 package com.ironhack.TheDataLayerHomework3.repository;
 
-import com.ironhack.TheDataLayerHomework3.enums.Industry;
-import com.ironhack.TheDataLayerHomework3.enums.Status;
 import com.ironhack.TheDataLayerHomework3.models.Account;
-import com.ironhack.TheDataLayerHomework3.models.Opportunity;
-import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

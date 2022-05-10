@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.ironhack.TheDataLayerHomework3.enums.Status.*;
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.clearConsole;
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
 
@@ -39,40 +38,11 @@ public class SalesRepMenu {
         while (input != 99) {
 
             input = inputAutowired.promptIntWithValidation("(1) New Sales Rep \n(2) Show all Sales Reps " +
-                    "\n(3) Report Lead by SalesRep" + "\n(4) Report Opportunity by SalesRep" +
-                    "\n(5) Report Opportunity Status by SalesRep" +
-                    "\n(6) Report Opportunity by Product" +
-                    "\n(7) Report Opportunity Status by Product" +
-                    "\n(11) Report Opportunity Status by City" +
                     "\n(99) Go Back", 99);
 
             if (input == 1) createNewSalesRep();
             else if (input == 2) showAllSalesRep();
-            else if (input == 3 ) reportLeadBySalesRep();
-            else if (input == 5 ) reportOpportunityBySalesRepAndStatus();
-            else if (input == 11 ) reportOpportunityByStatusAndCity();
         }
-    }
-
-    private void reportOpportunityByStatusAndCity() {
-    }
-
-    private void reportOpportunityBySalesRepAndStatus() {
-             SalesRep salesRep = getSalesRepFromInputId();
-             printHeading(" \n Choose the status for opportunity " + " \n ");
-             System.out.println("(1) Report OPEN by SalesRep");
-             System.out.println("(2) Report CLOSED-WON by SalesRep");
-             System.out.println("(3) Report CLOSED-LOST by SalesRep");
-
-
-                 Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
-                   if (newInput == 1) {
-                       System.out.println(opportunityRepository.countBySalesRepAndStatus(salesRep, OPEN));
-                    } else if (newInput == 2) {
-                       System.out.println(opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_WON));
-                    } else if (newInput == 3) {
-                       System.out.println(opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST));
-                   }
     }
 
 
@@ -132,11 +102,5 @@ public class SalesRepMenu {
         return selectedSalesRep;
     }
 
-
-    public void reportLeadBySalesRep(){
-        SalesRep salesRep = getSalesRepFromInputId();
-
-        System.out.println(salesRep.getName()+"have "+ leadRepository.countBySalesRep(salesRep) + "lead");
-    }
 
 }
