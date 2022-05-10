@@ -10,10 +10,10 @@ The LLIJ Team: Lucía Sánchez, Lisa Medina, Italia Herrera and Josefina Cresta.
 
 2. Open the directory as a project on a IDE as IntelliJ.
 
-3. Run the Main.java file on the path:
+3. Run the *TheDataLayerHomework3Application.java* file on the path:
 
 ```
-./src/main/java/Main/Main.java  
+./src/main/java/com/ironhack/TheDataLayerHomework3/TheDataLayerHomework3Application.java 
 ```
 ### Instructions 
 
