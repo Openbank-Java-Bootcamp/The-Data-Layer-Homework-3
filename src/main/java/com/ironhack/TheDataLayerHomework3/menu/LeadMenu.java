@@ -27,8 +27,6 @@ public class LeadMenu {
     final private Input inputAutowired;
     final private OpportunityMenu opportunityMenu;
     final private SalesRepMenu salesRepMenu;
-    private Lead currentLead;
-
     final private AccountMenu accountMenu;
 
     public LeadMenu(LeadRepository leadRepository, SalesRepRepository salesRepRepository, ContactRepository contactRepository,
@@ -48,7 +46,7 @@ public class LeadMenu {
         int input = 0;
 
         while (input != 99) {
-
+            clearConsole();
             input = inputAutowired.promptIntWithValidation("(1) Create New Lead \n(2) Show all Leads \n(3) Lookup Lead " +
                     "\n(4) Convert Lead \n(99) Go Back", 99);
 
@@ -76,8 +74,10 @@ public class LeadMenu {
 
             printSeparator(20);
 
-            List<Lead> leadList = leadRepository.findAll();
-            currentLead = (new Lead(leadList.size() + 1, newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, salesRepMenu.getSalesRepFromInputId()));
+//            List<Lead> leadList = leadRepository.findAll();
+//            currentLead = (new Lead(leadList.size() + 1, newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, salesRepMenu.getSalesRepFromInputId()));
+
+            Lead currentLead = (new Lead(newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, salesRepMenu.getSalesRepFromInputId()));
             leadRepository.save(currentLead);
 
             System.out.println(currentLead.toString());
@@ -112,9 +112,11 @@ public class LeadMenu {
         var leadList = leadRepository.findAll();
 
         if (!leadList.isEmpty()) {
-            int input = inputAutowired.promptIntWithValidation("Insert the ID you'd like to check: ", leadList.size());
+            String input = inputAutowired.promptTextWithValidation("Insert the ID you'd like to check:", List.of(Validation.LEAD));
 
-            System.out.println(leadList.get(input - 1).toString());
+            Lead foundLead = leadRepository.findById(Integer.valueOf(input)).get();
+
+            System.out.println(foundLead);
 
         } else {
             Utils.printLikeError("No Leads in the database, please create one");
@@ -135,9 +137,9 @@ public class LeadMenu {
         if (!leadList.isEmpty() && hasDeletedLead) {
             clearConsole();
 
-            int input = inputAutowired.promptIntWithValidation("Input the ID of the Lead you want to convert", leadList.size());
+            String input = inputAutowired.promptTextWithValidation("Input the ID of the Lead you want to convert", List.of(Validation.LEAD));
 
-            Lead foundLead = leadList.get(input - 1);
+            Lead foundLead = leadRepository.findById(Integer.valueOf(input)).get();
 
             Contact currentContact = createContact(foundLead);
 
@@ -145,18 +147,22 @@ public class LeadMenu {
 
             Opportunity currentOpportunity = opportunityMenu.createOpportunity(currentContact);
 
-            //deleteLead();
+            deleteLead(foundLead);
             anythingToContinue();
 
             int inputAccount = inputAutowired.promptIntWithValidation("¿Would you like to create a new Account?" +
                     "\n(1) Yes! \n(2) No, I want to add it to an existing one ", 2);
-            if(inputAccount==1) accountMenu.createAccount(currentContact, currentOpportunity);
-            else if (inputAccount==2) {
+
+            if (inputAccount == 1) accountMenu.createAccount(currentContact, currentOpportunity);
+
+            else if (inputAccount == 2) {
+
                 accountMenu.showAllAccounts();
+
                 String accountId = inputAutowired.promptTextWithValidation("Insert the Account ID", List.of(Validation.ACCOUNT));
 
                 Account selectedAccount = accountRepository.findById(accountId).get();
-                //TODO selectedAccountID
+                //TODO selectedAccountID --- aquí es donde peta creo
                 currentContact.setAccount(selectedAccount);
                 selectedAccount.getContactList().add(currentContact);
                 accountRepository.save(selectedAccount);
@@ -181,15 +187,11 @@ public class LeadMenu {
         return createdContact;
     }
 
-}
 
-//
-//    public void deleteLead() {
-//        printHeading("\n Successfully deleted: \n" + currentLead);
-//
-//        leadList.get(currentLead.getLeadId() - 1).setName("Deleted Lead");
-//        leadList.get(currentLead.getLeadId() - 1).setPhoneNumber(0L);
-//        leadList.get(currentLead.getLeadId() - 1).setEmail("Deleted Lead email");
-//        leadList.get(currentLead.getLeadId() - 1).setCompanyName("Deleted Lead company name");
-//
-//    }
+    public void deleteLead(Lead foundLead) {
+        printHeading("\n Successfully deleted the lead: \n" + foundLead);
+
+        leadRepository.delete(foundLead);
+    }
+
+}

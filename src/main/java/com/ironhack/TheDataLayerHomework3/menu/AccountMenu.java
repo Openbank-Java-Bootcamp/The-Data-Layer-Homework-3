@@ -84,7 +84,8 @@ public class AccountMenu {
             Utils.printHeading("- Your current Accounts - ");
 
             for (Account account : accountList) {
-                System.out.println(account);
+                System.out.println("Account ID: "+ account.getId() + " Account Industry: " + account.getIndustry() +
+                        " Account Country: " + account.getCountry() + " Account City: " + account.getCity());
             }
         } else {
             Utils.printLikeError("No Accounts in the database, please create one");

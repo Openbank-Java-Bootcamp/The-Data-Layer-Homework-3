@@ -36,7 +36,7 @@ public class SalesRepMenu {
         int input = 0;
 
         while (input != 99) {
-
+            clearConsole();
             input = inputAutowired.promptIntWithValidation("(1) New Sales Rep \n(2) Show all Sales Reps " +
                     "\n(99) Go Back", 99);
 
@@ -93,9 +93,11 @@ public class SalesRepMenu {
 
             String salesRepId = inputAutowired.promptTextWithValidation("Insert the Sales Rep ID", List.of(Validation.SALESREP));
 
-            for (SalesRep salesRep : salesRepList) {
-                if (salesRep.getId().equals(salesRepId)) selectedSalesRep = salesRep;
-            }
+            selectedSalesRep = salesRepRepository.findById(salesRepId).get();
+
+//            for (SalesRep salesRep : salesRepList) {
+//                if (salesRep.getId().equals(salesRepId)) selectedSalesRep = salesRep;
+//            }
         } else {
             Utils.printLikeError("No Sales reps in the database, please create one");
         }

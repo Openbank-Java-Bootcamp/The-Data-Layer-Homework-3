@@ -7,7 +7,7 @@ import com.ironhack.TheDataLayerHomework3.utils.Input;
 import org.springframework.stereotype.Component;
 
 import static com.ironhack.TheDataLayerHomework3.enums.Status.*;
-import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
+import static com.ironhack.TheDataLayerHomework3.utils.Utils.*;
 
 @Component
 public class ReportMenu {
@@ -28,7 +28,7 @@ public class ReportMenu {
         int input = 0;
 
         while (input != 99) {
-
+            clearConsole();
             input = inputAutowired.promptIntWithValidation(
                     "\n(3) Report Lead by SalesRep" +
                     "\n(4) Report Opportunity by SalesRep" +
@@ -49,9 +49,13 @@ public class ReportMenu {
         SalesRep salesRep = salesRepMenu.getSalesRepFromInputId();
 
         System.out.println(salesRep.getName()+"have "+ leadRepository.countBySalesRep(salesRep) + "lead");
+
+        anythingToContinue();
     }
 
     private void reportOpportunityByStatusAndCity() {
+
+        anythingToContinue();
     }
 
     private void reportOpportunityBySalesRepAndStatus() {
@@ -70,5 +74,7 @@ public class ReportMenu {
         } else if (newInput == 3) {
             System.out.println(opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST));
         }
+
+        anythingToContinue();
     }
 }
