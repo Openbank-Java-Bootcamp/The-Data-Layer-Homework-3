@@ -5,7 +5,6 @@ import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.models.Account;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
-import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
@@ -86,7 +85,7 @@ public class AccountMenu {
             Utils.printHeading("- Your current Accounts - ");
 
             for (Account account : accountList) {
-                System.out.println("Account ID: "+ account.getId() + " Account Industry: " + account.getIndustry() +
+                System.out.println("Account ID: "+ account.getAccountId() + " Account Industry: " + account.getIndustry() +
                         " Account Country: " + account.getCountry() + " Account City: " + account.getCity());
             }
         } else {

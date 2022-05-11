@@ -2,6 +2,7 @@ package com.ironhack.TheDataLayerHomework3.menu;
 
 
 import com.ironhack.TheDataLayerHomework3.enums.Product;
+import com.ironhack.TheDataLayerHomework3.enums.Status;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
@@ -43,6 +44,7 @@ public class OpportunityMenu {
         int quantity = inputAutowired.promptIntWithCheck("Number of products for this Opportunity", Integer.MAX_VALUE);
 
         Opportunity newOpportunity = new Opportunity(product, quantity, contact, OPEN);
+        System.out.println("ES UN ENUMS"+ newOpportunity.getStatus().toString());
 
         printHeading("\n New Opportunity: \n" + newOpportunity);
 
@@ -67,7 +69,7 @@ public class OpportunityMenu {
             int newInput;
 
             for (Opportunity opportunity : opportunityList) {
-                System.out.println("Opportunity ID: " + opportunity.getId() + " -> Decision Maker: " +
+                System.out.println("Opportunity ID: " + opportunity.getOpportunityId() + " -> Decision Maker: " +
                         opportunity.getDecisionMaker().getName());
             }
 
@@ -76,7 +78,7 @@ public class OpportunityMenu {
 
             foundOpportunity = opportunityRepository.findById(input).get();
 
-            printStatusMenu(foundOpportunity.getId());
+            printStatusMenu(foundOpportunity.getOpportunityId());
             newInput = inputAutowired.promptIntWithValidation("-> ", 3);
 
             if (newInput == 1) {

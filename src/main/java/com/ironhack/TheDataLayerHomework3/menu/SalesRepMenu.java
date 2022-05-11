@@ -51,7 +51,8 @@ public class SalesRepMenu {
         clearConsole();
         printHeading("Please input the following Sales Rep information");
 
-        String newSalesRepName = inputAutowired.promptTextWithValidation("Insert the SalesRep name", List.of(Validation.NAME));
+        String newSalesRepName = inputAutowired.promptTextWithValidation("Insert the SalesRep " +
+                "name", List.of(Validation.NAME));
 
         SalesRep currentSalesRep = new SalesRep(newSalesRepName);
 
@@ -88,7 +89,7 @@ public class SalesRepMenu {
 
         if (!salesRepList.isEmpty()) {
             for (SalesRep salesRep : salesRepList) {
-                System.out.println("Sales Rep ID: " + salesRep.getId() + " Name: " + salesRep.getName());
+                System.out.println("Sales Rep ID: " + salesRep.getSaleRepId() + " Name: " + salesRep.getName());
             }
 
             String salesRepId = inputAutowired.promptTextWithValidation("Insert the Sales Rep ID", List.of(Validation.SALESREP));

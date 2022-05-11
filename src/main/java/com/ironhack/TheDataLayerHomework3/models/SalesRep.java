@@ -17,7 +17,7 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 public class SalesRep {
 
     @Id
-    private String id;
+    private String saleRepId;
 
     private String name;
 
@@ -32,15 +32,14 @@ public class SalesRep {
 
     public SalesRep(String name) {
         this.name = name;
-        this.id = shortUUID();
+        this.saleRepId = shortUUID();
     }
+
 
     @Override
     public String toString() {
-        return "SalesRep{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return ((char) 27 + "[36m" + "SalesRep ID %s " + (char) 27 + "[39m" +
+                "\n Name: %s ").formatted(saleRepId, name);
     }
 }
 
