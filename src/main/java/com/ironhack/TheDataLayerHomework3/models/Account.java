@@ -19,7 +19,7 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 public class Account {
 
     @Id
-    private String id;
+    private String accountId;
 
     @Column(name = "employee_count")
     int employeeCount;
@@ -39,7 +39,7 @@ public class Account {
         this.employeeCount = employeeCount;
         this.city = city;
         this.country = country;
-        this.id = shortUUID();
+        this.accountId = shortUUID();
     }
 
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList,
@@ -50,7 +50,7 @@ public class Account {
         this.country = country;
         this.contactList = contactList;
         this.opportunityList = opportunityList;
-        this.id = shortUUID();
+        this.accountId = shortUUID();
     }
 
 
@@ -67,10 +67,11 @@ public class Account {
                 "\n\tProduct: %s" +
                 "\n\tQuantity: %s" +
                 "\n\tDecision Maker Name:  %s " +
-                "\n\tStatus: " ).formatted(id,
+                "\n\tStatus: " ).formatted(accountId,
                 industry.toString().toLowerCase(), employeeCount, country, city, contactList.get(0).toString(),
-                opportunityList.get(0).getId(), opportunityList.get(0).getProduct().toString().toLowerCase(), opportunityList.get(0).getQuantity(),
-                opportunityList.get(0).getDecisionMaker().getName(), opportunityList.get(0).getStatus().toString().toLowerCase());
+                opportunityList.get(0).getOpportunityId(), opportunityList.get(0).getProduct().toString().toLowerCase(),
+                opportunityList.get(0).getQuantity(), opportunityList.get(0).getDecisionMaker().getName(),
+                opportunityList.get(0).getStatus().toString().toLowerCase());
 
     }
 }

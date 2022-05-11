@@ -146,7 +146,7 @@ public class LeadMenu {
 
             Opportunity currentOpportunity = opportunityMenu.createOpportunity(currentContact);
 
-            createAccountWithContactAndLead(currentContact, currentOpportunity);
+            createAccountWithContactAndOpportunity(currentContact, currentOpportunity);
 
 
             deleteLead(foundLead);
@@ -161,7 +161,7 @@ public class LeadMenu {
     }
 
 
-    public void createAccountWithContactAndLead(Contact currentContact, Opportunity currentOpportunity) {
+    public void createAccountWithContactAndOpportunity(Contact currentContact, Opportunity currentOpportunity) {
         int inputAccount = inputAutowired.promptIntWithValidation("¿Would you like to create a new Account?" +
                 "\n(1) Yes! \n(2) No, I want to add it to an existing one ", 2);
 
@@ -169,9 +169,11 @@ public class LeadMenu {
             Account createdAccount = accountMenu.createAccount(currentContact, currentOpportunity);
 
             currentContact.setAccount(createdAccount);
+            System.out.println("CONTACT ACCOUNT" + currentContact.getAccount());
             contactRepository.save(currentContact);
 
             currentOpportunity.setAccount(createdAccount);
+            System.out.println("OPPORTUNITY ACCOUNT" + currentOpportunity.getAccount());
             opportunityRepository.save(currentOpportunity);
         }
 
@@ -188,6 +190,7 @@ public class LeadMenu {
 
             currentOpportunity.setAccount(selectedAccount);
             opportunityRepository.save(currentOpportunity);
+
 
 //                List<Contact> contactList = selectedAccount.getContactList();
 //                contactList.add(currentContact);

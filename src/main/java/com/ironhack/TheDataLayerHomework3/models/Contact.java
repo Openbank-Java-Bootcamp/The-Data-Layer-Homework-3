@@ -14,7 +14,7 @@ import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 public class Contact {
 
     @Id
-    private String id;
+    private String contactId;
 
     private String name;
 
@@ -40,7 +40,7 @@ public class Contact {
         this.email = email;
         this.companyName = companyName;
         this.salesRep = salesRep;
-        this.id = shortUUID();
+        this.contactId = shortUUID();
     }
 
     public Contact(Lead lead) {
@@ -49,12 +49,12 @@ public class Contact {
         this.email = lead.getEmail();
         this.companyName = lead.getCompanyName();
         this.salesRep = lead.getSalesRep();
-        this.id = shortUUID();
+        this.contactId = shortUUID();
     }
 
     @Override
     public String toString() {
         return ((char) 27 + "[36m" + "\n\tContact ID: %s " + (char) 27 + "[39m" + "\n\t  Name: %s,\n\t  Phone Number: %s,\n\t  Email: %s," +
-                "\n\t  Company Name: %s").formatted(id, getName(), getPhoneNumber(), getEmail(), getCompanyName());
+                "\n\t  Company Name: %s").formatted(contactId, getName(), getPhoneNumber(), getEmail(), getCompanyName());
     }
 }
