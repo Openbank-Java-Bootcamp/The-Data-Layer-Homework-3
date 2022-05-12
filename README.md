@@ -37,3 +37,4 @@ Our CRM should allow you to:
   - Opportunities associated with an Account
  
 <img src="https://github.com/Openbank-Java-Bootcamp/The-Data-Layer-Homework-3/blob/main/ClassDiagram.png">
+<img src="https://github.com/Openbank-Java-Bootcamp/The-Data-Layer-Homework-3/blob/main/UseCaseDiagramHW3.drawio.png">
