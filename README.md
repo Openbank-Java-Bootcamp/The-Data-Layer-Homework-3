@@ -36,3 +36,4 @@ Our CRM should allow you to:
   - Quantity of products
   - Opportunities associated with an Account
  
+<img src="https://github.com/Openbank-Java-Bootcamp/The-Data-Layer-Homework-3/blob/main/ClassDiagram.png">
