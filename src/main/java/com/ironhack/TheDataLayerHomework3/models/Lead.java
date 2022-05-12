@@ -42,8 +42,12 @@ public class Lead {
 
     @Override
     public String toString() {
-        return ((char) 27 + "[36m" + "Lead ID %s " + (char) 27 + "[39m" + "\n Name: %s, \n Phone Number: %s, " +
-                "\n Email: %s, \n Company name: %s \n").formatted(leadId, name, phoneNumber, email, companyName);
+        return ((char) 27 + "[36m" + "Lead ID %s " + (char) 27 + "[39m" +
+                "\n Name: %s, " +
+                "\n Phone Number: %s, " +
+                "\n Email: %s, " +
+                "\n Company name: %s \n" +
+                "\n\t  %s").formatted(leadId, name, phoneNumber, email, companyName, salesRep);
 
     }
 }

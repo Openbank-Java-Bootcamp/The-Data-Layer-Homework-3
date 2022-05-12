@@ -55,6 +55,8 @@ public class Account {
 
 
     @Override
+
+    //todo list ??
     public String toString() {
         return ((char) 27 + "[36m" + "\nAccount ID %s " + (char) 27 + "[39m" +
                 "\nIndustry: %s, " +
@@ -67,7 +69,7 @@ public class Account {
                 "\n\tProduct: %s" +
                 "\n\tQuantity: %s" +
                 "\n\tDecision Maker Name:  %s " +
-                "\n\tStatus: " ).formatted(accountId,
+                "\n\tStatus: %s" ).formatted(accountId,
                 industry.toString().toLowerCase(), employeeCount, country, city, contactList.get(0).toString(),
                 opportunityList.get(0).getOpportunityId(), opportunityList.get(0).getProduct().toString().toLowerCase(),
                 opportunityList.get(0).getQuantity(), opportunityList.get(0).getDecisionMaker().getName(),

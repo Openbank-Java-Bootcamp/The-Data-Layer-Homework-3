@@ -54,7 +54,11 @@ public class Contact {
 
     @Override
     public String toString() {
-        return ((char) 27 + "[36m" + "\n\tContact ID: %s " + (char) 27 + "[39m" + "\n\t  Name: %s,\n\t  Phone Number: %s,\n\t  Email: %s," +
-                "\n\t  Company Name: %s").formatted(contactId, getName(), getPhoneNumber(), getEmail(), getCompanyName());
+        return ((char) 27 + "[36m" + "\n\tContact ID: %s " + (char) 27 + "[39m" +
+                "\n\t  Name: %s," +
+                "\n\t  Phone Number: %s," +
+                "\n\t  Email: %s," +
+                "\n\t  Company Name: %s" +
+                "\n\t  %s").formatted(contactId, name, phoneNumber, email, companyName, salesRep);
     }
 }
