@@ -216,9 +216,6 @@ public class Queries {
     }
 
 
-
-
-
     //City Queries
 
     public void reportOpportunityByCity() {
@@ -353,39 +350,50 @@ public class Queries {
 
 
     public void minEmployeeCount() {
-    }
-
-    public void medianEmployeeCount() {
-    }
-
-    public void meanEmployeeCount() {
+        System.out.println("The minimum Employee count is: " + accountRepository.minEmployee());
     }
 
     public void maxEmployeeCount() {
+        System.out.println("The minimum Employee count is: " + accountRepository.maxEmployee());
+    }
+
+    public void medianEmployeeCount()  {
+        System.out.println("The minimum Employee count is: " + accountRepository.avgEmployee());
+    }
+
+    public void meanEmployeeCount() {
+        System.out.println("The minimum Employee count is: " + accountRepository.avgEmployee());
     }
 
 
 
 
     public void minQuantityProductCount() {
+        System.out.println("The minimum product quantity is: " + opportunityRepository.minQuantity());
     }
 
     public void maxQuantityProductCount() {
+        System.out.println("The maximum product quantity is: " + opportunityRepository.maxQuantity());
     }
 
     public void medianQuantityProductCount() {
+        System.out.println("The maximum product quantity is: " + opportunityRepository.medianQuantity());
     }
 
     public void meanQuantityProductCount() {
+        System.out.println("The mean product quantity is: " +opportunityRepository.avgQuantity());
     }
 
 
 
     public void minOpportunityByAccountCount() {
+        System.out.println("The minimum opportunity count is: " + opportunityRepository.minOpportunities());
     }
 
     public void maxOpportunityByAccountCount() {
+        System.out.println("The maximum opportunity count is: " + opportunityRepository.maxOpportunities());
     }
+
 
     public void medianOpportunityByAccountCount() {
     }
