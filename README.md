@@ -17,4 +17,24 @@ The LLIJ Team: Lucía Sánchez, Lisa Medina, Italia Herrera and Josefina Cresta.
 ```
 ### Instructions 
 
+For this project, we buit a CRM (Customer Relationship Management) system. CRMs are a tool that almost every sales team uses to track prospective and existing customers through the sales process.
 
+Our CRM should allow you to:
+
+- Track Leads.
+- Convert Leads into Opportunities.
+- Associate an Opportunity with an Account.
+- Associate Contacts with an Opportunity.
+- Add new Sales Reps.
+- Report feature:
+  - By Sales Rep
+  - By Product
+  - By Country
+  - By City
+  - By Industry
+  - Employee Count
+  - Quantity of products
+  - Opportunities associated with an Account
+ 
+<img src="https://github.com/Openbank-Java-Bootcamp/The-Data-Layer-Homework-3/blob/main/ClassDiagram.png">
+<img src="https://github.com/Openbank-Java-Bootcamp/The-Data-Layer-Homework-3/blob/main/UseCaseDiagramHW3.drawio.png">

@@ -55,6 +55,8 @@ public class Account {
 
 
     @Override
+
+    //todo list ??
     public String toString() {
         return ((char) 27 + "[36m" + "\nAccount ID %s " + (char) 27 + "[39m" +
                 "\nIndustry: %s, " +

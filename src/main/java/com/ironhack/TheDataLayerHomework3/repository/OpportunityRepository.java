@@ -36,6 +36,8 @@ public interface OpportunityRepository  extends JpaRepository<Opportunity, Strin
 
 
 
+    //The mean number of Opportunities associated with an Account can be displayed by typing “Mean Opps per Account”
+
 
 
 
