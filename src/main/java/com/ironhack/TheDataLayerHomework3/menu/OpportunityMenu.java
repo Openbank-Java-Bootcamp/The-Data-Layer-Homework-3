@@ -54,7 +54,7 @@ public class OpportunityMenu {
 
     public void printProductMenu() {
         clearConsole();
-        printHeading(" \n Choose a product for this opportunity? \n ");
+        printHeading(" \n Choose a product for this opportunity \n ");
         System.out.println("(1) HYBRID");
         System.out.println("(2) FLATBED");
         System.out.println("(3) BOX");

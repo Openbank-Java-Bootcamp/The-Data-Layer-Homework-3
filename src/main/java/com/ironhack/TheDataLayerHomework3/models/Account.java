@@ -63,11 +63,11 @@ public class Account {
                 "\nCity %s " +
                 "\nContact List: \t%s " +
                 "\nOpportunity List: " +
-                (char) 27 + "[36m" + "\n\tpportunity ID %s " + (char) 27 + "[39m"+
+                (char) 27 + "[36m" + "\n\topportunity ID %s " + (char) 27 + "[39m"+
                 "\n\tProduct: %s" +
                 "\n\tQuantity: %s" +
                 "\n\tDecision Maker Name:  %s " +
-                "\n\tStatus: " ).formatted(accountId,
+                "\n\tStatus: %s" ).formatted(accountId,
                 industry.toString().toLowerCase(), employeeCount, country, city, contactList.get(0).toString(),
                 opportunityList.get(0).getOpportunityId(), opportunityList.get(0).getProduct().toString().toLowerCase(),
                 opportunityList.get(0).getQuantity(), opportunityList.get(0).getDecisionMaker().getName(),

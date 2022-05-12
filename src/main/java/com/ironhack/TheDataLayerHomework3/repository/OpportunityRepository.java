@@ -10,51 +10,30 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OpportunityRepository  extends JpaRepository<Opportunity, String> {
-    /*By SalesRep*/
-    //A count of all Opportunities by SalesRep can be displayed by typing “Report Opportunity by SalesRep”
 
-    //A count of all CLOSED_WON Opportunities by SalesRep can be displayed by typing “Report CLOSED-WON by SalesRep”
-    //A count of all CLOSED_LOST Opportunities by SalesRep can be displayed by typing “Report CLOSED-LOST by SalesRep”
-    // A count of all OPEN Opportunities by SalesRep can be displayed by typing “Report OPEN by SalesRep”
+    Integer countBySalesRepAndStatus(SalesRep salesRep, Status status);
 
-     Integer countBySalesRepAndStatus(SalesRep salesRep, Status status);
+    Integer countBySalesRep(SalesRep salesRep);
 
+    Integer countByProduct (Product product);
 
-    /*By Product*/
-    //A count of all Opportunities by the product can be displayed by typing “Report Opportunity by the product”
-
-    //A count of all CLOSED_WON Opportunities by the product can be displayed by typing “Report CLOSED-WON by the product”
-    //A count of all CLOSED_LOST Opportunities by the product can be displayed by typing “Report CLOSED-LOST by the product”
-    //A count of all OPEN Opportunities by the product can be displayed by typing “Report OPEN by the product”
- //    Integer countByProductAndStatus(Product product, Status status);
-
-    /*By Country*/
-    //A count of all Opportunities by country can be displayed by typing “Report Opportunity by Country”
-    //   Integer countOpportunityByAccount_City (String accountId, String city);
-
-    //A count of all CLOSED_WON Opportunities by country can be displayed by typing “Report CLOSED-WON by Country”
-    //A count of all CLOSED_LOST Opportunities by country can be displayed by typing “Report CLOSED-LOST by Country”
-    //A count of all OPEN Opportunities by country can be displayed by typing “Report OPEN by Country”
-
-    // Integer countByCountryAndStatus(String country, Status status);
-
-    /*           */
-
-    /*By City*/
-    //A count of all Opportunities by the city can be displayed by typing “Report Opportunity by City”
-    //   Integer countBySalesRep(SalesRep salesRep);
-    //A count of all CLOSED_WON Opportunities by the city can be displayed by typing “Report CLOSED-WON by City”
-    //A count of all CLOSED_LOST Opportunities by the city can be displayed by typing “Report CLOSED-LOST by City”
-    //A count of all OPEN Opportunities by the city can be displayed by typing “Report OPEN by City”
-      Integer countByStatusAndAccount_City(Status status, String city);
+    Integer countByProductAndStatus(Product product, Status status);
 
 
-    /*By Industry*/
-    //A count of all Opportunities by industry can be displayed by typing “Report Opportunity by Industry”
-    //A count of all CLOSED_WON Opportunities by industry can be displayed by typing “Report CLOSED-WON by Industry”
-    //A count of all CLOSED_LOST Opportunities by industry can be displayed by typing “Report CLOSED-LOST by Industry”
-    //A count of all OPEN Opportunities by industry can be displayed by typing “Report OPEN by Industry”
-    //  Integer countByIndustryAndStatus(Industry industry, Status status);
+
+    Integer countByAccount_Country (String accountId, String country);
+    Integer countByStatusAndAccount_Country (String accountId, String country, Status status);
+
+
+
+    Integer countByAccount_City (String accountId, String city);
+    Integer countByStatusAndAccount_City(String accountId, String city, Status status);
+
+
+    Integer countByAccount_Industry (String accountId, Industry industry);
+    Integer countByStatusAndAccount_Industry(String accountId, Industry industry, Status status);
+
+
 
 
 
