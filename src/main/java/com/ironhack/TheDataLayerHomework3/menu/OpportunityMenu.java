@@ -7,6 +7,7 @@ import com.ironhack.TheDataLayerHomework3.enums.Validation;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
+import com.ironhack.TheDataLayerHomework3.utils.Colors;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
 import org.springframework.stereotype.Component;
@@ -67,11 +68,11 @@ public class OpportunityMenu {
             int newInput;
 
             for (Opportunity opportunity : opportunityList) {
-                System.out.println(" Opportunity ID: " + opportunity.getOpportunityId() + " -> Decision Maker: " +
+                System.out.println("\n* " + Colors.CYAN_BOLD_BRIGHT +"Opportunity ID: " + opportunity.getOpportunityId() + Colors.RESET + " -> Decision Maker: " +
                         opportunity.getDecisionMaker().getName());
             }
 
-            String input = inputAutowired.promptTextWithValidation("Input the ID of the Opportunity to change status",
+            String input = inputAutowired.promptTextWithValidation("\n\nInput the ID of the Opportunity to change status",
                     List.of(Validation.OPPORTUNITY));
 
             foundOpportunity = opportunityRepository.findById(input).get();

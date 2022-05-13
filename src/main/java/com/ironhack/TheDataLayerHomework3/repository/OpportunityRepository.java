@@ -72,5 +72,14 @@ public interface OpportunityRepository  extends JpaRepository<Opportunity, Strin
 
 
 
+    @Query(value = "SELECT COUNT(account_id) as count FROM opportunity GROUP BY account_id ORDER BY count DESC;"
+            , nativeQuery = true)
+    List<Integer> avgOpportunitiesByAccount();
+
+    @Query(value = "SELECT COUNT(account_id) FROM opportunity GROUP BY account_id ORDER BY account_id;"
+            , nativeQuery = true)
+    List<Integer> medianOpportunitiesByAccount();
+
+
 
 }

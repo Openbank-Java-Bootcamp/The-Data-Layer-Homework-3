@@ -38,10 +38,10 @@ public class MainMenu {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
                     Colors.RESET+ "\n(1)" +Colors.GREEN_BOLD_BRIGHT + " Sales Rep Menu " +
-                            Colors.RESET+ "\n(2)" +Colors.BLUE_BOLD_BRIGHT +  " Lead Menu " +
-                            Colors.RESET+ "\n(3)" +Colors.YELLOW_BOLD_BRIGHT +" Opportunity Status Menu " +
-                            Colors.RESET+ "\n(4)" +Colors.CYAN_BOLD_BRIGHT +" Report Menu " +
-                            Colors.RESET+ "\n\n(99)" +Colors.RED +" Exit" + Colors.RESET, 99 );
+                    Colors.RESET+ "\n(2)" +Colors.BLUE_BOLD_BRIGHT +  " Lead Menu " +
+                    Colors.RESET+ "\n(3)" +Colors.YELLOW_BOLD_BRIGHT +" Opportunity Status Menu " +
+                    Colors.RESET+ "\n(4)" +Colors.CYAN_BOLD_BRIGHT +" Report Menu " +
+                    Colors.RESET+ "\n\n(99)" +Colors.RED +" Exit" + Colors.RESET, 99 );
 
 
             if (input == 1) salesRepMenu.menu();

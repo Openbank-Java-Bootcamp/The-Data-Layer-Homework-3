@@ -6,6 +6,7 @@ import com.ironhack.TheDataLayerHomework3.models.Account;
 import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
+import com.ironhack.TheDataLayerHomework3.utils.Colors;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,7 @@ public class AccountMenu {
 
         industry = selectIndustry();
 
-        int employeeCount =  inputAutowired.promptIntWithCheck("Number of employees", Integer.MAX_VALUE);
+        int employeeCount = inputAutowired.promptIntWithCheck("Number of employees", Integer.MAX_VALUE);
 
         String city = inputAutowired.promptTextWithValidation("City of Account", List.of(Validation.STRING));
 
@@ -53,11 +54,10 @@ public class AccountMenu {
 
         accountRepository.save(newAccount);
 
-        printHeading("\n Successfully created: \n"+ newAccount);
+        printHeading("\n Successfully created: \n" + newAccount);
 
         return newAccount;
     }
-
 
 
     public Industry selectIndustry() {
@@ -76,6 +76,7 @@ public class AccountMenu {
 
 
     }
+
     public void showAllAccounts() {
         clearConsole();
 
@@ -85,7 +86,7 @@ public class AccountMenu {
             Utils.printHeading("- Your current Accounts - ");
 
             for (Account account : accountList) {
-                System.out.println("Account ID: "+ account.getAccountId() + " Account Industry: " + account.getIndustry() +
+                System.out.println("\n* " + Colors.CYAN_BOLD_BRIGHT + "Account ID: " + account.getAccountId() + Colors.RESET +  " Account Industry: " + account.getIndustry() +
                         " Account Country: " + account.getCountry() + " Account City: " + account.getCity());
             }
         } else {

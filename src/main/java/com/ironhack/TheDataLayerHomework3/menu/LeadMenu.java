@@ -99,7 +99,7 @@ public class LeadMenu {
             Utils.printHeading("- Your current Leads - ");
 
             for (Lead lead : leadList) {
-                if (!lead.getName().equals("Deleted Lead")) System.out.println(lead);
+                if (!lead.getName().equals("Deleted Lead")) System.out.println("* "+lead);
             }
         } else {
             Utils.printLikeError("No Leads in the database, please create one");

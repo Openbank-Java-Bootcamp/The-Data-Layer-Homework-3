@@ -178,10 +178,10 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    "\n(1)" + Colors.PURPLE + " Mean Opportunity by Account Count" + Colors.RESET +
-                            "\n(2)" + Colors.PURPLE + " Median Opportunity by Account Count" + Colors.RESET +
-                            "\n(3)" + Colors.PURPLE + " Max Opportunity by Account Count" + Colors.RESET +
-                            "\n(4)" + Colors.PURPLE + " Min Opportunity by Account Count" + Colors.RESET +
+                    "\n(1)" + Colors.PURPLE + " Mean Opportunity Count by Account" + Colors.RESET +
+                            "\n(2)" + Colors.PURPLE + " Median Opportunity Count by Account" + Colors.RESET +
+                            "\n(3)" + Colors.PURPLE + " Max Opportunity Count by Account" + Colors.RESET +
+                            "\n(4)" + Colors.PURPLE + " Min Opportunity Count by Account" + Colors.RESET +
                             "\n\n(99)" + Colors.RED + " Go Back"+ Colors.RESET , 99);
 
             if (input == 1 ) queries.meanOpportunityByAccountCount();

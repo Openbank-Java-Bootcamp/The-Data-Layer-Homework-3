@@ -56,15 +56,18 @@ class QueriesTest {
         Contact contact2 = new Contact(lead2);
         contactRepository.saveAll(List.of(contact1, contact2));
 
-        Opportunity opportunity1 = new Opportunity(Product.BOX, 95621, contact1, Status.OPEN);
-        Opportunity opportunity2 = new Opportunity(Product.BOX, 95621, contact2, Status.OPEN);
-        opportunityRepository.saveAll(List.of(opportunity1, opportunity2));
+        Opportunity opportunity1 = new Opportunity(Product.BOX, 95, contact1, Status.OPEN);
+        Opportunity opportunity2 = new Opportunity(Product.FLATBED, 21, contact2, Status.OPEN);
+        Opportunity opportunity3 = new Opportunity(Product.FLATBED, 1, contact2, Status.OPEN);
+        opportunityRepository.saveAll(List.of(opportunity1, opportunity2, opportunity3));
 
         Account account1 = new Account(ECOMMERCE, 22, "Popinolandia", "France",
                 List.of(contact1), List.of(opportunity1));
-        Account account2 = new Account(ECOMMERCE, 22, "Sierra Nevada", "Italy",
+        Account account2 = new Account(ECOMMERCE, 3, "Sierra Nevada", "Italy",
                 List.of(contact2), List.of(opportunity2));
-        accountRepository.saveAll(List.of(account1, account2));
+        Account account3 = new Account(ECOMMERCE, 10, "Sierra Nevada", "Italy",
+                List.of(contact2), List.of(opportunity1));
+        accountRepository.saveAll(List.of(account1, account2, account3));
 
     }
 
@@ -77,95 +80,76 @@ class QueriesTest {
         accountRepository.deleteAll();
     }
 
-    @Test
-    void reportLeadBySalesRep() {
-    }
-
-    @Test
-    void reportOpportunityBySalesRep() {
-    }
-
-    @Test
-    void reportOpportunityBySalesRepAndStatus() {
-    }
-
-    @Test
-    void reportOpportunityByStatusAndProduct() {
-    }
-
-    @Test
-    void reportOpportunityByProduct() {
-    }
-
-    @Test
-    void reportOpportunityByCountry() {
-    }
-
-    @Test
-    void reportOpportunityByStatusAndCountry() {
-    }
-
-    @Test
-    void reportOpportunityByCity() {
-    }
-
-    @Test
-    void reportOpportunityByStatusAndCity() {
-    }
-
-    @Test
-    void reportOpportunityByIndustry() {
-    }
-
-    @Test
-    void reportOpportunityByStatusAndIndustry() {
-    }
 
     @Test
     void minEmployeeCount() {
+        assertEquals(3, accountRepository.minEmployee());
+        assertNotEquals(22, accountRepository.minEmployee());
     }
 
     @Test
     void maxEmployeeCount() {
+        assertEquals(22, accountRepository.maxEmployee());
+        assertNotEquals(3, accountRepository.maxEmployee());
     }
 
     @Test
     void medianEmployeeCount() {
+        assertEquals(10, accountRepository.medianEmployee());
+        assertNotEquals(8.6, accountRepository.medianEmployee());
     }
 
     @Test
     void meanEmployeeCount() {
+        assertEquals(11.66, accountRepository.avgEmployee());
+        assertNotEquals(3, accountRepository.avgEmployee());
     }
 
     @Test
     void minQuantityProductCount() {
+        assertEquals(1, opportunityRepository.minQuantity());
+        assertNotEquals(95, opportunityRepository.minQuantity());
     }
 
     @Test
     void maxQuantityProductCount() {
+        assertEquals(95, opportunityRepository.maxQuantity());
+        assertNotEquals(5, opportunityRepository.maxQuantity());
     }
 
     @Test
     void medianQuantityProductCount() {
+        assertEquals(21, opportunityRepository.medianQuantity());
+        assertNotEquals(3, opportunityRepository.medianQuantity());
     }
 
     @Test
     void meanQuantityProductCount() {
+        assertEquals(39, opportunityRepository.avgQuantity());
+        assertNotEquals(35, opportunityRepository.avgQuantity());
     }
 
     @Test
     void minOpportunityByAccountCount() {
+        assertEquals(1, opportunityRepository.minOpportunities());
+        assertNotEquals(95, opportunityRepository.minOpportunities());
     }
 
     @Test
     void maxOpportunityByAccountCount() {
+        assertEquals(2, opportunityRepository.maxOpportunities());
+        assertNotEquals(5, opportunityRepository.maxOpportunities());
     }
 
     @Test
     void medianOpportunityByAccountCount() {
+        assertEquals(1.5, opportunityRepository.medianOpportunitiesByAccount());
+        assertNotEquals(3, opportunityRepository.medianOpportunitiesByAccount());
     }
 
     @Test
     void meanOpportunityByAccountCount() {
+        assertEquals(1.5, opportunityRepository.avgOpportunitiesByAccount());
+        assertNotEquals(2, opportunityRepository.avgOpportunitiesByAccount());
     }
 }

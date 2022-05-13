@@ -168,4 +168,17 @@ class OpportunityRepositoryTest {
         assertEquals(1, opportunityRepository.minOpportunities());
         assertNotEquals(95, opportunityRepository.minOpportunities());
     }
+
+    @Test
+    void avgOpportunitiesByAccount() {
+        assertEquals(1.5, opportunityRepository.avgOpportunitiesByAccount());
+        assertNotEquals(2, opportunityRepository.avgOpportunitiesByAccount());
+    }
+
+    @Test
+    void medianOpportunitiesByAccount() {
+        assertEquals(1.5, opportunityRepository.medianOpportunitiesByAccount());
+        assertNotEquals(3, opportunityRepository.medianOpportunitiesByAccount());
+    }
+
 }

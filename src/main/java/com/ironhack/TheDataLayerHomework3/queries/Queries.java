@@ -50,7 +50,7 @@ public class Queries {
         clearConsole();
         SalesRep salesRep = salesRepMenu.getSalesRepFromInputId();
 
-        System.out.println(salesRep.getName() + " has " + leadRepository.countBySalesRep(salesRep) + " Leads");
+        printHeading(salesRep.getName() + " has " + leadRepository.countBySalesRep(salesRep) + " Leads");
 
         anythingToContinue();
     }
@@ -59,7 +59,7 @@ public class Queries {
         clearConsole();
         SalesRep salesRep = salesRepMenu.getSalesRepFromInputId();
 
-        System.out.println(salesRep.getName() + " has " + opportunityRepository.countBySalesRep(salesRep) + " Opportunities");
+        printHeading(salesRep.getName() + " has " + opportunityRepository.countBySalesRep(salesRep) + " Opportunities");
 
         anythingToContinue();
     }
@@ -74,13 +74,13 @@ public class Queries {
 
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
-        System.out.println(salesRep.getName() +  " has:");
+
         if (newInput == 1) {
-            System.out.println("\t" + opportunityRepository.countBySalesRepAndStatus(salesRep, OPEN)+ " OPEN Opportunites");
+            printHeading(salesRep.getName() +  " has " + opportunityRepository.countBySalesRepAndStatus(salesRep, OPEN)+ " OPEN Opportunites");
         } else if (newInput == 2) {
-            System.out.println("\t" + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_WON) + " CLOSED_WON Opportunites");
+            printHeading(salesRep.getName() +  " has "+ opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_WON) + " CLOSED_WON Opportunites");
         } else if (newInput == 3) {
-            System.out.println("\t" + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST) + " CLOSED_LOST Opportunites");
+            printHeading(salesRep.getName() +  " has "+ opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST) + " CLOSED_LOST Opportunites");
         }
 
         anythingToContinue();
@@ -115,15 +115,15 @@ public class Queries {
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
 
         if (newInput == 1) {
-            System.out.println(opportunityRepository.countByProductAndStatus(product, OPEN)+
-                    " opportunities OPEN has "+ product);
+            printHeading(opportunityRepository.countByProductAndStatus(product, OPEN)+
+                    " opportunities have an OPEN status and a "+ product + " product type ");
 
         } else if (newInput == 2) {
-            System.out.println(opportunityRepository.countByProductAndStatus(product, CLOSED_WON)+
-                    " opportunities CLOSED_WON has "+ product);
+            printHeading(opportunityRepository.countByProductAndStatus(product, CLOSED_WON)+
+                    " opportunities have a CLOSED_WON status and a "+ product + " product type ");
         } else if (newInput == 3) {
-            System.out.println( opportunityRepository.countByProductAndStatus(product, CLOSED_LOST)+
-                    " opportunities CLOSED_LOST has " + product);
+            printHeading( opportunityRepository.countByProductAndStatus(product, CLOSED_LOST)+
+                    " opportunities have a CLOSED_LOST status and a "+ product + " product type ");
         }
         anythingToContinue();
     }
@@ -141,16 +141,16 @@ public class Queries {
         int input = inputAutowired.promptIntWithValidation("-> ", 3);
         if (input == 1) {
             product = Product.HYBRID;
-            System.out.println(opportunityRepository.countByProduct(product)+
-                    " opportunities has "+ product);
+            printHeading(opportunityRepository.countByProduct(product)+
+                    " opportunities have a "+ product + " product type ");
         } else if (input == 2) {
             product = Product.FLATBED;
-            System.out.println(opportunityRepository.countByProduct(product)+
-                    " opportunities has "+ product);
+            printHeading(opportunityRepository.countByProduct(product)+
+                    " opportunities have a "+ product + " product type ");
         } else if (input == 3) {
             product = Product.BOX;
-            System.out.println(opportunityRepository.countByProduct(product)+
-                    " opportunities has "+ product);
+            printHeading(opportunityRepository.countByProduct(product)+
+                    " opportunities have a "+ product + " product type ");
         }
         anythingToContinue();
     }
@@ -170,9 +170,9 @@ public class Queries {
         System.out.println(Accountscountries);
 
         String country = inputAutowired.promptTextWithValidation(
-                "\nInsert the Country", List.of(Validation.COUNTRY));
+                "\n\nInsert the Country", List.of(Validation.COUNTRY));
 
-        System.out.println(opportunityRepository.countByAccount_Country(country)+
+        printHeading(opportunityRepository.countByAccount_Country(country)+
                 " opportunities in "+ country.toUpperCase());
 
         anythingToContinue();
@@ -192,7 +192,7 @@ public class Queries {
         System.out.println(Accountscountries);
 
         String country = inputAutowired.promptTextWithValidation(
-                "\nInsert the Country", List.of(Validation.COUNTRY));
+                "\n\nInsert the Country", List.of(Validation.COUNTRY));
 
         printHeading(" \n Choose the Status to report " + " \n");
         System.out.println("(1) OPEN");
@@ -202,18 +202,16 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_Country(OPEN, country) +
-                    " opportunities OPEN in " + country.toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_Country(OPEN, country) +
+                    " OPEN opportunities in " + country.toUpperCase());
         } else if (newInput == 2) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_Country(CLOSED_WON, country) +
-                    " opportunities CLOSED_WON in " + country.toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_Country(CLOSED_WON, country) +
+                    " CLOSED_WON opportunities in " + country.toUpperCase());
         } else if (newInput == 3) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_Country(CLOSED_LOST, country) +
-                    " opportunities CLOSED_LOST in " + country.toUpperCase());
-
-            anythingToContinue();
-
+            printHeading(opportunityRepository.countByStatusAndAccount_Country(CLOSED_LOST, country) +
+                    " CLOSED_LOST opportunities in " + country.toUpperCase());
         }
+        anythingToContinue();
     }
 
     //City Queries
@@ -231,9 +229,9 @@ public class Queries {
         System.out.println(Accountscities);
 
         String city = inputAutowired.promptTextWithValidation(
-                "\nInsert the City", List.of(Validation.STRING));
+                "\n\nInsert the City", List.of(Validation.STRING));
 
-        System.out.println(opportunityRepository.countByAccount_City(city) + " opportunities in "+ city.toUpperCase());
+        printHeading(opportunityRepository.countByAccount_City(city) + " opportunities in "+ city.toUpperCase());
 
         anythingToContinue();
     }
@@ -251,7 +249,7 @@ public class Queries {
         System.out.println(Accountscities);
 
         String city = inputAutowired.promptTextWithValidation(
-                "\nInsert the City", List.of(Validation.STRING));
+                "\n\nInsert the City", List.of(Validation.STRING));
 
         printHeading(" \n Choose the Status to report " + " \n");
         System.out.println("(1) OPEN");
@@ -261,14 +259,14 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_City(OPEN, city) +
-                    " opportunities OPEN in " + city.toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_City(OPEN, city) +
+                    " OPEN opportunities in " + city.toUpperCase());
         } else if (newInput == 2) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_City(CLOSED_WON, city)+
-                    " opportunities CLOSED_WON in " + city.toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_City(CLOSED_WON, city)+
+                    " CLOSED_WON opportunities in " + city.toUpperCase());
         } else if (newInput == 3) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_City(CLOSED_LOST, city)+
-                    " opportunities CLOSED_LOST in " + city.toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_City(CLOSED_LOST, city)+
+                    " CLOSED_LOST opportunities in " + city.toUpperCase());
         }
 
         anythingToContinue();
@@ -284,8 +282,8 @@ public class Queries {
 
         Industry industry = accountMenu.selectIndustry();
 
-        System.out.println(opportunityRepository.countByAccount_Industry(industry)+
-                " opportunities with industry "+ industry.toString().toUpperCase());
+        printHeading(opportunityRepository.countByAccount_Industry(industry)+
+                " opportunities with " + industry.toString().toUpperCase() +" industry ");
 
         anythingToContinue();
 
@@ -307,14 +305,14 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_Industry(OPEN, industry) +
-                    " opportunities OPEN with industry "+ industry.toString().toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_Industry(OPEN, industry) +
+                    " OPEN opportunities with " + industry.toString().toUpperCase() +" industry ");
         } else if (newInput == 2) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_Industry(CLOSED_WON, industry)+
-                    " opportunities CLOSED_WON with industry "+ industry.toString().toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_Industry(CLOSED_WON, industry)+
+                    " CLOSED_WON opportunities with " + industry.toString().toUpperCase() +" industry ");
         } else if (newInput == 3) {
-            System.out.println(opportunityRepository.countByStatusAndAccount_Industry(CLOSED_LOST, industry)+
-                    " opportunities CLOSED_LOST with industry "+ industry.toString().toUpperCase());
+            printHeading(opportunityRepository.countByStatusAndAccount_Industry(CLOSED_LOST, industry)+
+                    " CLOSED_LOST opportunities with " + industry.toString().toUpperCase() +" industry ");
         }
 
         anythingToContinue();
@@ -324,14 +322,14 @@ public class Queries {
 
     public void minEmployeeCount() {
         clearConsole();
-        System.out.println("The minimum Employee count is: " + accountRepository.minEmployee());
+        printHeading("The minimum Employee count is: " + accountRepository.minEmployee());
 
         anythingToContinue();
     }
 
     public void maxEmployeeCount() {
         clearConsole();
-        System.out.println("The maximum Employee count is: " + accountRepository.maxEmployee());
+        printHeading("The maximum Employee count is: " + accountRepository.maxEmployee());
         anythingToContinue();
     }
 
@@ -340,20 +338,20 @@ public class Queries {
 
         List<Integer> employeeList = accountRepository.medianEmployee();
 
-        Integer median;
+        double median;
 
         if (employeeList.size() % 2 == 0)
             median = ( employeeList.get(employeeList.size() / 2) +  employeeList.get(employeeList.size() / 2 - 1))/2;
         else
             median =  employeeList.get(employeeList.size() / 2);
 
-        System.out.println("The median Employee count is: " + median);
+        printHeading("The median Employee count is: " + median);
         anythingToContinue();
     }
 
     public void meanEmployeeCount() {
         clearConsole();
-        System.out.println("The mean Employee count is: " + accountRepository.avgEmployee());
+        printHeading("The mean Employee count is: " + accountRepository.avgEmployee());
         anythingToContinue();
     }
 
@@ -362,13 +360,13 @@ public class Queries {
 
     public void minQuantityProductCount() {
         clearConsole();
-        System.out.println("The minimum product quantity is: " + opportunityRepository.minQuantity());
+        printHeading("The minimum product quantity is: " + opportunityRepository.minQuantity());
         anythingToContinue();
     }
 
     public void maxQuantityProductCount() {
         clearConsole();
-        System.out.println("The maximum product quantity is: " + opportunityRepository.maxQuantity());
+        printHeading("The maximum product quantity is: " + opportunityRepository.maxQuantity());
         anythingToContinue();
     }
 
@@ -377,20 +375,20 @@ public class Queries {
 
         List<Integer> quantityList = opportunityRepository.medianQuantity();
 
-        Integer median;
+        double median;
 
         if (quantityList.size() % 2 == 0)
             median = ( quantityList.get(quantityList.size() / 2) + quantityList.get(quantityList.size() / 2 - 1))/2;
         else
             median = quantityList.get(quantityList.size() / 2);
 
-        System.out.println("The median product quantity is: " + median);
+        printHeading("The median product quantity is: " + median);
         anythingToContinue();
     }
 
     public void meanQuantityProductCount() {
         clearConsole();
-        System.out.println("The mean product quantity is: " + opportunityRepository.avgQuantity());
+        printHeading("The mean product quantity is: " + opportunityRepository.avgQuantity());
         anythingToContinue();
     }
 
@@ -398,23 +396,45 @@ public class Queries {
 
     public void minOpportunityByAccountCount() {
         clearConsole();
-        System.out.println("The minimum opportunity count is: " + opportunityRepository.minOpportunities());
+        printHeading("The minimum opportunity count is: " + opportunityRepository.minOpportunities());
         anythingToContinue();
     }
 
     public void maxOpportunityByAccountCount() {
         clearConsole();
-        System.out.println("The maximum opportunity count is: " + opportunityRepository.maxOpportunities());
+        printHeading("The maximum opportunity count is: " + opportunityRepository.maxOpportunities());
         anythingToContinue();
     }
 
     public void medianOpportunityByAccountCount() {
         clearConsole();
+
+        List<Integer> opportunitiesByAccountList = opportunityRepository.medianOpportunitiesByAccount();
+
+        double median;
+
+        if (opportunitiesByAccountList.size() % 2 == 0)
+            median = ( opportunitiesByAccountList.get(opportunitiesByAccountList.size() / 2) + opportunitiesByAccountList.get(opportunitiesByAccountList.size() / 2 - 1))/2;
+        else
+            median = opportunitiesByAccountList.get(opportunitiesByAccountList.size() / 2);
+
+        printHeading("The median opportunity by account is: " + median);
         anythingToContinue();
     }
 
     public void meanOpportunityByAccountCount() {
         clearConsole();
+
+        List<Integer> opportunitiesByAccountList = opportunityRepository.avgOpportunitiesByAccount();
+
+        int sum = 0;
+
+        for (Integer d : opportunitiesByAccountList) sum += d;
+
+        double avg = sum/opportunitiesByAccountList.size();
+
+        printHeading("The mean opportunity by account is: " + avg);
+
         anythingToContinue();
     }
 

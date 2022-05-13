@@ -6,6 +6,7 @@ import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.repository.LeadRepository;
 import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
 import com.ironhack.TheDataLayerHomework3.repository.SalesRepRepository;
+import com.ironhack.TheDataLayerHomework3.utils.Colors;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
 import org.springframework.stereotype.Component;
@@ -37,9 +38,10 @@ public class SalesRepMenu {
 
         while (input != 99) {
             clearConsole();
-            input = inputAutowired.promptIntWithValidation("(1) New Sales Rep \n(2) Show all Sales Reps " +
-                    "\n\n(99) Go Back", 99);
-
+            input = inputAutowired.promptIntWithValidation(
+                    Colors.RESET + "\n(1)" + Colors.GREEN + " New Sales Rep" +
+                    Colors.RESET + "\n(2)" + Colors.GREEN + " Show all Sales Reps " +
+                    Colors.RESET + "\n\n(99)" + Colors.RED + " Exit" + Colors.RESET, 99);
             if (input == 1) createNewSalesRep();
             else if (input == 2) showAllSalesRep();
         }
@@ -58,8 +60,7 @@ public class SalesRepMenu {
 
         SalesRep storedSalesRep = salesRepRepository.save(currentSalesRep);
 
-        System.out.println("Successfully created Sales Rep");
-        System.out.println(storedSalesRep);
+        printHeading("\n Successfully created: \n" + storedSalesRep);
 
         Utils.anythingToContinue();
         Utils.clearConsole();
@@ -74,7 +75,7 @@ public class SalesRepMenu {
             Utils.printHeading("- Your current Sales Reps - ");
 
             for (SalesRep salesRep : salesRepList) {
-                System.out.println(salesRep);
+                System.out.println("* " + salesRep);
             }
         } else {
             Utils.printLikeError("No Sales Reps in the database, please create one");
@@ -89,7 +90,7 @@ public class SalesRepMenu {
 
         if (!salesRepList.isEmpty()) {
             for (SalesRep salesRep : salesRepList) {
-                System.out.println(salesRep.toString());
+                System.out.println(Colors.CYAN_BOLD_BRIGHT +" Sales Rep ID: " + salesRep.getSaleRepId() + Colors.RESET +  " Name: " + salesRep.getName());
             }
 
             String salesRepId = inputAutowired.promptTextWithValidation("\n\nInsert the Sales Rep ID\n", List.of(Validation.SALESREP));
