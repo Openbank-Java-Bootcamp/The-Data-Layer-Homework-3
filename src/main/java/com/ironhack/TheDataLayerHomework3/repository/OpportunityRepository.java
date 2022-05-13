@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OpportunityRepository  extends JpaRepository<Opportunity, String> {
 
@@ -42,19 +44,21 @@ public interface OpportunityRepository  extends JpaRepository<Opportunity, Strin
     Integer minQuantity();
 
     @Query(value = "SELECT AVG(quantity) FROM opportunity", nativeQuery = true)
-    Integer avgQuantity();
+    double avgQuantity();
 
-    @Query(value = "SET @row_index := -1;\n" +
-            "\n" +
-            "    SELECT AVG(subq.quantity) as median_value\n" +
-            "    FROM (\n" +
-            "            SELECT @row_index:=@row_index + 1 AS row_index, quantity\n" +
-            "            FROM opportunity\n" +
-            "                    ORDER BY quantity\n" +
-            "    ) AS subq\n" +
-            "    WHERE subq.row_index\n" +
-            "    IN (FLOOR(@row_index / 2) , CEIL(@row_index / 2))", nativeQuery = true)
-    Integer medianQuantity();
+
+    //   **  bonus!! a crazy median query which works on MySQL but not here yay :) **
+
+//    @Query(value = "SET @row_index := -1;SELECT AVG(subq.quantity) as median_value FROM (SELECT @row_index:=@row_index + 1 AS row_index, quantity\n" +
+//            "            FROM opportunity\n" +
+//            "                    ORDER BY quantity\n" +
+//            "    ) AS subq\n" +
+//            "    WHERE subq.row_index\n" +
+//            "    IN (FLOOR(@row_index / 2) , CEIL(@row_index / 2))", nativeQuery = true)
+
+    @Query(value ="SELECT quantity FROM opportunity ORDER by quantity" , nativeQuery = true)
+    List<Integer> medianQuantity();
+
 
 
 

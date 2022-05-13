@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AccountRepository  extends JpaRepository<Account, String> {
 
@@ -15,18 +17,9 @@ public interface AccountRepository  extends JpaRepository<Account, String> {
     Integer minEmployee();
 
     @Query(value = "SELECT AVG(employee_count) FROM account", nativeQuery = true)
-    Integer avgEmployee();
+    double avgEmployee();
 
-    @Query(value = "SET @row_index := -1;\n" +
-            "\n" +
-            "    SELECT AVG(subq.employee_count) as median_value\n" +
-            "    FROM (\n" +
-            "            SELECT @row_index:=@row_index + 1 AS row_index, employee_count\n" +
-            "            FROM account\n" +
-            "                    ORDER BY employee_count\n" +
-            "    ) AS subq\n" +
-            "    WHERE subq.row_index\n" +
-            "    IN (FLOOR(@row_index / 2) , CEIL(@row_index / 2))", nativeQuery = true)
-    Integer medianEmployee();
+    @Query(value ="SELECT employee_count FROM account ORDER by employee_count" , nativeQuery = true)
+    List<Integer> medianEmployee();
 
 }

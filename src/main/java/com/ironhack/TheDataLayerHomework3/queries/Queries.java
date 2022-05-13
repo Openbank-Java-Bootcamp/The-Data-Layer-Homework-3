@@ -13,6 +13,7 @@ import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.ironhack.TheDataLayerHomework3.enums.Status.*;
@@ -323,7 +324,17 @@ public class Queries {
 
     public void medianEmployeeCount() {
         clearConsole();
-        System.out.println("The median Employee count is: " + accountRepository.medianEmployee());
+
+        List<Integer> employeeList = accountRepository.medianEmployee();
+
+        Integer median;
+
+        if (employeeList.size() % 2 == 0)
+            median = ( employeeList.get(employeeList.size() / 2) +  employeeList.get(employeeList.size() / 2 - 1))/2;
+        else
+            median =  employeeList.get(employeeList.size() / 2);
+
+        System.out.println("The median Employee count is: " + median);
         anythingToContinue();
     }
 
@@ -334,6 +345,7 @@ public class Queries {
     }
 
     //Quantity States
+
 
     public void minQuantityProductCount() {
         clearConsole();
@@ -349,7 +361,17 @@ public class Queries {
 
     public void medianQuantityProductCount() {
         clearConsole();
-        System.out.println("The median product quantity is: " + opportunityRepository.medianQuantity());
+
+        List<Integer> quantityList = opportunityRepository.medianQuantity();
+
+        Integer median;
+
+        if (quantityList.size() % 2 == 0)
+            median = ( quantityList.get(quantityList.size() / 2) + quantityList.get(quantityList.size() / 2 - 1))/2;
+        else
+            median = quantityList.get(quantityList.size() / 2);
+
+        System.out.println("The median product quantity is: " + median);
         anythingToContinue();
     }
 
