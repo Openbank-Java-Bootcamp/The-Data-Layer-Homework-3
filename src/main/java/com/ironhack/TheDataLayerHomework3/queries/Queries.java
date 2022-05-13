@@ -10,10 +10,12 @@ import com.ironhack.TheDataLayerHomework3.models.SalesRep;
 import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
 import com.ironhack.TheDataLayerHomework3.repository.LeadRepository;
 import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
+import com.ironhack.TheDataLayerHomework3.utils.Colors;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import org.springframework.stereotype.Component;
 
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
