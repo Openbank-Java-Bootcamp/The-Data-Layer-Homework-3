@@ -13,8 +13,7 @@ public class Utils {
     private List<Lead> leads = new ArrayList<>();
 
     public static void printLikeError(String message) {
-        System.out.println((char) 27 + "[31m" + message);
-        System.out.print((char) 27 + "[39m");
+        System.out.println(Colors.RED_BOLD_BRIGHT+ message + Colors.RESET );
     }
 
     public static void clearConsole() {
@@ -32,7 +31,7 @@ public class Utils {
 
     public static void printHeading(String title) {
         printSeparator(30);
-        System.out.println((char) 27 + "[35m" + title + (char) 27+ "[39m" );
+        System.out.println(Colors.PURPLE_BOLD_BRIGHT+ title + Colors.RESET );
         printSeparator(30);
     }
 

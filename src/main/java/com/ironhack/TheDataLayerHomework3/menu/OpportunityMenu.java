@@ -44,8 +44,6 @@ public class OpportunityMenu {
         int quantity = inputAutowired.promptIntWithCheck("Number of products for this Opportunity", Integer.MAX_VALUE);
 
         Opportunity newOpportunity = new Opportunity(product, quantity, contact, OPEN);
-        System.out.println("ES UN ENUMS"+ newOpportunity.getStatus().toString());
-
         printHeading("\n New Opportunity: \n" + newOpportunity);
 
         opportunityRepository.save(newOpportunity);

@@ -7,6 +7,7 @@ import com.ironhack.TheDataLayerHomework3.queries.Queries;
 import com.ironhack.TheDataLayerHomework3.repository.AccountRepository;
 import com.ironhack.TheDataLayerHomework3.repository.LeadRepository;
 import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
+import com.ironhack.TheDataLayerHomework3.utils.Colors;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,15 +32,15 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                     "\n(1) By SalesRep" +
-                            "\n(2) By Product" +
-                            "\n(3) By Country" +
-                            "\n(4) By City" +
-                            "\n(5) By Industry" +
-                            "\n(6) Employee Count States" +
-                            "\n(7) Quantity States" +
-                             "\n(8) Opportunity States" +
-                            "\n\n(99) Go Back", 99);
+                     "\n(1)"+ Colors.GREEN_BOLD_BRIGHT +" By SalesRep" + Colors.RESET +
+                            "\n(2)"+ Colors.BLUE_BOLD_BRIGHT +" By Product" + Colors.RESET +
+                            "\n(3)"+ Colors.PURPLE_BOLD_BRIGHT +" By Country" + Colors.RESET +
+                            "\n(4)"+ Colors.CYAN_BOLD_BRIGHT +" By City" + Colors.RESET +
+                            "\n(5)"+ Colors.GREEN_BOLD_BRIGHT +" By Industry" + Colors.RESET +
+                            "\n(6)"+ Colors.YELLOW_BOLD_BRIGHT +" Employee Count States" + Colors.RESET +
+                            "\n(7)"+ Colors.CYAN_BOLD_BRIGHT +" Quantity States" + Colors.RESET +
+                             "\n(8)"+ Colors.PURPLE_BOLD_BRIGHT +" Opportunity States" + Colors.RESET +
+                            "\n\n(99)"+ Colors.RED +" Go Back" + Colors.RESET , 99);
 
 
             if (input == 1 ) bySalesRepMenu();
@@ -59,10 +60,10 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    "\n(1) Report Lead by SalesRep" +
-                    "\n(2) Report Opportunity by SalesRep" +
-                    "\n(3) Report Opportunity Status by SalesRep" +
-                    "\n\n(99) Go Back", 99);
+                    "\n(1)"+ Colors.GREEN +" Report Lead by SalesRep"  + Colors.RESET +
+                    "\n(2)"+ Colors.GREEN +" Report Opportunity by SalesRep"  + Colors.RESET +
+                    "\n(3)"+ Colors.GREEN +" Report Opportunity Status by SalesRep"  + Colors.RESET +
+                    "\n\n(99)"+ Colors.RED +" Go Back" + Colors.RESET, 99);
 
 
             if (input == 1 ) queries.reportLeadBySalesRep();
@@ -78,33 +79,14 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                            "\n(1) Report Opportunity by Product" +
-                            "\n(2) Report Opportunity Status by Product" +
-                            "\n\n(99) Go Back", 99);
+                            "\n(1)"+ Colors.BLUE +" Report Opportunity by Product" + Colors.RESET +
+                            "\n(2)"+ Colors.BLUE +" Report Opportunity Status by Product" + Colors.RESET +
+                            "\n\n(99)"+ Colors.RED +" Go Back"+ Colors.RESET , 99);
 
             if (input == 1 ) queries.reportOpportunityByProduct();
             else if (input == 2 ) queries.reportOpportunityByStatusAndProduct();
         }
     }
-
-
-    public void byCityMenu() {
-        int input = 0;
-
-        while (input != 99) {
-            clearConsole();
-            input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                            "\n(1) Report Opportunity by City" +
-                            "\n(2) Report Opportunity Status by City" +
-                            "\n\n(99) Go Back", 99);
-
-            if (input == 1 ) queries.reportOpportunityByCity();
-            else if (input == 2 ) queries.reportOpportunityByStatusAndCity();
-        }
-    }
-
 
     public void byCountryMenu() {
         int input = 0;
@@ -112,15 +94,30 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                            "\n(1) Report Opportunity by Country" +
-                            "\n(2) Report Opportunity Status by Country" +
-                            "\n\n(99) Go Back", 99);
+                    "\n(1)"+ Colors.PURPLE +" Report Opportunity by Country"+ Colors.RESET  +
+                            "\n(2)"+ Colors.PURPLE +" Report Opportunity Status by Country"+ Colors.RESET  +
+                            "\n\n(99)"+ Colors.RED +" Go Back"+ Colors.RESET, 99);
 
             if (input == 1 ) queries.reportOpportunityByCountry();
             else if (input == 2 ) queries.reportOpportunityByStatusAndCountry();
         }
     }
+
+    public void byCityMenu() {
+        int input = 0;
+
+        while (input != 99) {
+            clearConsole();
+            input = inputAutowired.promptIntWithValidation(
+                            "\n(1)" + Colors.CYAN +" Report Opportunity by City" + Colors.RESET  +
+                            "\n(2)" + Colors.CYAN + " Report Opportunity Status by City" + Colors.RESET  +
+                            "\n\n(99)"+ Colors.RED +" Go Back"+ Colors.RESET  , 99);
+
+            if (input == 1 ) queries.reportOpportunityByCity();
+            else if (input == 2 ) queries.reportOpportunityByStatusAndCity();
+        }
+    }
+
 
     public void byIndustryMenu() {
         int input = 0;
@@ -128,10 +125,9 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                            "\n(1) Report Opportunity by Industry" +
-                            "\n(2) Report Opportunity Status by Industry" +
-                            "\n\n(99) Go Back", 99);
+                            "\n(1)" + Colors.GREEN +" Report Opportunity by Industry"+ Colors.RESET   +
+                            "\n(2)" + Colors.GREEN + "  Report Opportunity Status by Industry"+ Colors.RESET   +
+                            "\n\n(99)" + Colors.RED +" Go Back"+ Colors.RESET  , 99);
 
             if (input == 1 ) queries.reportOpportunityByIndustry();
             else if (input == 2 ) queries.reportOpportunityByStatusAndIndustry();
@@ -144,12 +140,11 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                            "\n(1)  Mean Employee Count" +
-                            "\n(2)  Median Employee Count" +
-                            "\n(3)  Max Employee Count" +
-                            "\n(4)  Min Employee Count" +
-                             "\n\n(99) Go Back", 99);
+                            "\n(1)" + Colors.YELLOW +" Mean Employee Count"+ Colors.RESET    +
+                            "\n(2)" + Colors.YELLOW +" Median Employee Count"+ Colors.RESET    +
+                            "\n(3)" + Colors.YELLOW +" Max Employee Count"+ Colors.RESET    +
+                            "\n(4)" + Colors.YELLOW +" Min Employee Count"+ Colors.RESET    +
+                             "\n\n(99)" + Colors.RED +" Go Back"+ Colors.RESET   + Colors.RESET, 99);
 
             if (input == 1 ) queries.meanEmployeeCount();
             else if (input == 2 ) queries.medianEmployeeCount();
@@ -164,12 +159,11 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                    "\n(1)  Mean Quantity Product Count" +
-                            "\n(2)  Median Quantity Product Count" +
-                            "\n(3)  Max Quantity Product Count" +
-                            "\n(4)  Min Quantity Product Count" +
-                            "\n\n(99) Go Back", 99);
+                    "\n(1)" + Colors.CYAN +" Mean Quantity Product Count"+ Colors.RESET +
+                            "\n(2)" + Colors.CYAN +" Median Quantity Product Count"+ Colors.RESET +
+                            "\n(3)" + Colors.CYAN +" Max Quantity Product Count"+ Colors.RESET +
+                            "\n(4)" + Colors.CYAN +" Min Quantity Product Count"+ Colors.RESET +
+                            "\n\n(99)" + Colors.RED +" Go Back"+ Colors.RESET, 99);
 
             if (input == 1 ) queries.meanQuantityProductCount();
             else if (input == 2 ) queries.medianQuantityProductCount();
@@ -184,12 +178,11 @@ public class ReportMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
-                    //TODO TODO
-                    "\n(1)  Mean Opportunity by Account Count" +
-                            "\n(2)  Median Opportunity by Account Count" +
-                            "\n(3)  Max Opportunity by Account Count" +
-                            "\n(4)  Min Opportunity by Account Count" +
-                            "\n\n(99) Go Back", 99);
+                    "\n(1)" + Colors.PURPLE + " Mean Opportunity by Account Count" + Colors.RESET +
+                            "\n(2)" + Colors.PURPLE + " Median Opportunity by Account Count" + Colors.RESET +
+                            "\n(3)" + Colors.PURPLE + " Max Opportunity by Account Count" + Colors.RESET +
+                            "\n(4)" + Colors.PURPLE + " Min Opportunity by Account Count" + Colors.RESET +
+                            "\n\n(99)" + Colors.RED + " Go Back"+ Colors.RESET , 99);
 
             if (input == 1 ) queries.meanOpportunityByAccountCount();
             else if (input == 2 ) queries.medianOpportunityByAccountCount();

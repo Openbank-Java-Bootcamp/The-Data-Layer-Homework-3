@@ -89,16 +89,13 @@ public class SalesRepMenu {
 
         if (!salesRepList.isEmpty()) {
             for (SalesRep salesRep : salesRepList) {
-                System.out.println("Sales Rep ID: " + salesRep.getSaleRepId() + " Name: " + salesRep.getName());
+                System.out.println(salesRep.toString());
             }
 
-            String salesRepId = inputAutowired.promptTextWithValidation("Insert the Sales Rep ID", List.of(Validation.SALESREP));
+            String salesRepId = inputAutowired.promptTextWithValidation("\n\nInsert the Sales Rep ID\n", List.of(Validation.SALESREP));
 
             selectedSalesRep = salesRepRepository.findById(salesRepId).get();
 
-//            for (SalesRep salesRep : salesRepList) {
-//                if (salesRep.getId().equals(salesRepId)) selectedSalesRep = salesRep;
-//            }
         } else {
             Utils.printLikeError("No Sales reps in the database, please create one");
         }

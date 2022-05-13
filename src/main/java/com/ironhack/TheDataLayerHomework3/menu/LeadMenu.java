@@ -6,6 +6,7 @@ import com.ironhack.TheDataLayerHomework3.models.Contact;
 import com.ironhack.TheDataLayerHomework3.models.Lead;
 import com.ironhack.TheDataLayerHomework3.models.Opportunity;
 import com.ironhack.TheDataLayerHomework3.repository.*;
+import com.ironhack.TheDataLayerHomework3.utils.Colors;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import com.ironhack.TheDataLayerHomework3.utils.Utils;
 import org.springframework.stereotype.Component;
@@ -46,11 +47,12 @@ public class LeadMenu {
 
         while (input != 99) {
             clearConsole();
-            input = inputAutowired.promptIntWithValidation("(1) Create New Lead " +
-                    "\n(2) Show all Leads " +
-                    "\n(3) Lookup Lead " +
-                    "\n(4) Convert Lead " +
-                    "\n\n(99) Go Back", 99);
+            input = inputAutowired.promptIntWithValidation(
+                    "(1)" + Colors.BLUE + " Create New Lead " + Colors.RESET +
+                    "\n(2)" + Colors.BLUE +  " Show all Leads " + Colors.RESET +
+                    "\n(3)" + Colors.BLUE + " Lookup Lead " + Colors.RESET +
+                    "\n(4)" + Colors.BLUE + " Convert Lead " + Colors.RESET +
+                    "\n\n(99)" + Colors.RED + "  Go Back"+ Colors.RESET , 99);
 
             if (input == 1) createNewLead();
             else if (input == 2) showLeads();
@@ -75,9 +77,6 @@ public class LeadMenu {
             String companyName = inputAutowired.promptTextWithValidation("Insert the Company name", List.of(Validation.STRING));
 
             printSeparator(20);
-
-//            List<Lead> leadList = leadRepository.findAll();
-//            currentLead = (new Lead(leadList.size() + 1, newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, salesRepMenu.getSalesRepFromInputId()));
 
             Lead currentLead = (new Lead(newLeadName, newLeadPhoneNumber, newLeadEmail, companyName, salesRepMenu.getSalesRepFromInputId()));
             leadRepository.save(currentLead);
@@ -114,7 +113,7 @@ public class LeadMenu {
         var leadList = leadRepository.findAll();
 
         if (!leadList.isEmpty()) {
-            String input = inputAutowired.promptTextWithValidation("Insert the ID you'd like to check:", List.of(Validation.LEAD));
+            String input = inputAutowired.promptTextWithValidation("\n\nInsert the ID you'd like to check:", List.of(Validation.LEAD));
 
             Lead foundLead = leadRepository.findById(Integer.valueOf(input)).get();
 
@@ -139,7 +138,7 @@ public class LeadMenu {
         if (!leadList.isEmpty() && hasDeletedLead) {
             clearConsole();
 
-            String input = inputAutowired.promptTextWithValidation("Input the ID of the Lead you want to convert", List.of(Validation.LEAD));
+            String input = inputAutowired.promptTextWithValidation("\n\nInput the ID of the Lead you want to convert", List.of(Validation.LEAD));
 
             Lead foundLead = leadRepository.findById(Integer.valueOf(input)).get();
 
@@ -165,14 +164,13 @@ public class LeadMenu {
 
 
     public void createAccountWithContactAndOpportunity(Contact currentContact, Opportunity currentOpportunity) {
-        int inputAccount = inputAutowired.promptIntWithValidation("¿Would you like to create a new Account?" +
+        int inputAccount = inputAutowired.promptIntWithValidation(Colors.BLUE + "\n\nWould you like to create a new Account?" + Colors.RESET +
                 "\n(1) Yes! \n(2) No, I want to add it to an existing one ", 2);
 
         if (inputAccount == 1) {
             Account createdAccount = accountMenu.createAccount(currentContact, currentOpportunity);
 
             currentContact.setAccount(createdAccount);
-            System.out.println("CONTACT ACCOUNT" + currentContact.getAccount());
             contactRepository.save(currentContact);
 
             currentOpportunity.setAccount(createdAccount);
@@ -192,10 +190,6 @@ public class LeadMenu {
 
             currentOpportunity.setAccount(selectedAccount);
             opportunityRepository.save(currentOpportunity);
-
-
-//                List<Contact> contactList = selectedAccount.getContactList();
-//                contactList.add(currentContact);
 
             accountRepository.save(selectedAccount);
 
