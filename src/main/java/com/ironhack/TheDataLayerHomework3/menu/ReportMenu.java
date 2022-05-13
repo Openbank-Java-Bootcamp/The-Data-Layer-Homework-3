@@ -126,7 +126,7 @@ public class ReportMenu {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
                             "\n(1)" + Colors.GREEN +" Report Opportunity by Industry"+ Colors.RESET   +
-                            "\n(2)" + Colors.GREEN + "  Report Opportunity Status by Industry"+ Colors.RESET   +
+                            "\n(2)" + Colors.GREEN + " Report Opportunity Status by Industry"+ Colors.RESET   +
                             "\n\n(99)" + Colors.RED +" Go Back"+ Colors.RESET  , 99);
 
             if (input == 1 ) queries.reportOpportunityByIndustry();

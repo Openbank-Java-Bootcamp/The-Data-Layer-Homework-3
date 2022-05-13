@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.clearConsole;
+import static com.ironhack.TheDataLayerHomework3.utils.Utils.printHeading;
 
 @Component
 public class MainMenu {
@@ -49,7 +50,7 @@ public class MainMenu {
             if (input == 3) opportunityMenu.changeStatus();
             if (input == 4) reportMenu.menu();
         }
-
+        printHeading("\uD83C\uDF38 BYE, HAVE A NICE LIFE! ");
         System.exit(0);
     }
 
