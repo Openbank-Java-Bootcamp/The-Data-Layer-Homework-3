@@ -176,7 +176,6 @@ public class LeadMenu {
             contactRepository.save(currentContact);
 
             currentOpportunity.setAccount(createdAccount);
-            System.out.println("OPPORTUNITY ACCOUNT" + currentOpportunity.getAccount());
             opportunityRepository.save(currentOpportunity);
         }
 

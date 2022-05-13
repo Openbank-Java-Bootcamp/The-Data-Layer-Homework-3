@@ -69,7 +69,7 @@ public class OpportunityMenu {
             int newInput;
 
             for (Opportunity opportunity : opportunityList) {
-                System.out.println("Opportunity ID: " + opportunity.getOpportunityId() + " -> Decision Maker: " +
+                System.out.println(" Opportunity ID: " + opportunity.getOpportunityId() + " -> Decision Maker: " +
                         opportunity.getDecisionMaker().getName());
             }
 

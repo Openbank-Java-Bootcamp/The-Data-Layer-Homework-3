@@ -13,6 +13,7 @@ import com.ironhack.TheDataLayerHomework3.repository.OpportunityRepository;
 import com.ironhack.TheDataLayerHomework3.utils.Input;
 import org.springframework.stereotype.Component;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,15 +72,13 @@ public class Queries {
 
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
+        System.out.println(salesRep.getName() +  " has:");
         if (newInput == 1) {
-            System.out.println("Your count is: "
-                    + opportunityRepository.countBySalesRepAndStatus(salesRep, OPEN));
+            System.out.println("\t" + opportunityRepository.countBySalesRepAndStatus(salesRep, OPEN)+ " OPEN Opportunites");
         } else if (newInput == 2) {
-            System.out.println("Your count is: "
-                    + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_WON));
+            System.out.println("\t" + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_WON) + " CLOSED_WON Opportunites");
         } else if (newInput == 3) {
-            System.out.println("Your count is: "
-                    + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST));
+            System.out.println("\t" + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST) + " CLOSED_LOST Opportunites");
         }
 
         anythingToContinue();
@@ -112,16 +111,17 @@ public class Queries {
         System.out.println("(3) CLOSED-LOST");
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
+
         if (newInput == 1) {
-            System.out.println("Your count is: "
-                    + opportunityRepository.countByProductAndStatus(product, OPEN));
+            System.out.println(opportunityRepository.countByProductAndStatus(product, OPEN)+
+                    " opportunities OPEN has "+ product);
 
         } else if (newInput == 2) {
-            System.out.println("Your count is: "
-                    + opportunityRepository.countByProductAndStatus(product, CLOSED_WON));
+            System.out.println(opportunityRepository.countByProductAndStatus(product, CLOSED_WON)+
+                    " opportunities CLOSED_WON has "+ product);
         } else if (newInput == 3) {
-            System.out.println("Your count is: "
-                    + opportunityRepository.countByProductAndStatus(product, CLOSED_LOST));
+            System.out.println( opportunityRepository.countByProductAndStatus(product, CLOSED_LOST)+
+                    " opportunities CLOSED_LOST has " + product);
         }
         anythingToContinue();
     }
@@ -139,16 +139,16 @@ public class Queries {
         int input = inputAutowired.promptIntWithValidation("-> ", 3);
         if (input == 1) {
             product = Product.HYBRID;
-            System.out.println("Your count is: "
-                    + opportunityRepository.countByProduct(product));
+            System.out.println(opportunityRepository.countByProduct(product)+
+                    " opportunities has "+ product);
         } else if (input == 2) {
             product = Product.FLATBED;
-            System.out.println("Your count is: "
-                    + opportunityRepository.countByProduct(product));
+            System.out.println(opportunityRepository.countByProduct(product)+
+                    " opportunities has "+ product);
         } else if (input == 3) {
             product = Product.BOX;
-            System.out.println("Your count is: "
-                    + opportunityRepository.countByProduct(product));
+            System.out.println(opportunityRepository.countByProduct(product)+
+                    " opportunities has "+ product);
         }
         anythingToContinue();
     }
@@ -160,28 +160,34 @@ public class Queries {
 
         List<Account> accountList = accountRepository.findAll();
         printHeading("Countries");
+        List<String> Accountscountries = new ArrayList<>();
         for (Account account : accountList) {
-            System.out.println("Account: " + account.getAccountId());
-            System.out.println(account.getCountry());
+            if(!Accountscountries.contains(account.getCountry().toLowerCase()))
+                Accountscountries.add(account.getCountry().toLowerCase());
         }
+        System.out.println(Accountscountries);
 
         String country = inputAutowired.promptTextWithValidation(
                 "\nInsert the Country", List.of(Validation.COUNTRY));
 
-        System.out.println("Your count is: " +
-                opportunityRepository.countByAccount_Country(country));
+        System.out.println(opportunityRepository.countByAccount_Country(country)+
+                " opportunities in "+ country.toUpperCase());
 
         anythingToContinue();
     }
+
 
     public void reportOpportunityByStatusAndCountry() {
         clearConsole();
 
         List<Account> accountList = accountRepository.findAll();
         printHeading("Countries");
+        List<String> Accountscountries = new ArrayList<>();
         for (Account account : accountList) {
-            System.out.println(account.getCountry());
+            if (!Accountscountries.contains(account.getCountry().toLowerCase()))
+                Accountscountries.add(account.getCountry().toLowerCase());
         }
+        System.out.println(Accountscountries);
 
         String country = inputAutowired.promptTextWithValidation(
                 "\nInsert the Country", List.of(Validation.COUNTRY));
@@ -194,18 +200,18 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Country(OPEN, country));
+            System.out.println(opportunityRepository.countByStatusAndAccount_Country(OPEN, country) +
+                    " opportunities OPEN in " + country.toUpperCase());
         } else if (newInput == 2) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Country(CLOSED_WON, country));
+            System.out.println(opportunityRepository.countByStatusAndAccount_Country(CLOSED_WON, country) +
+                    " opportunities CLOSED_WON in " + country.toUpperCase());
         } else if (newInput == 3) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Country(CLOSED_LOST, country));
+            System.out.println(opportunityRepository.countByStatusAndAccount_Country(CLOSED_LOST, country) +
+                    " opportunities CLOSED_LOST in " + country.toUpperCase());
+
+            anythingToContinue();
+
         }
-
-        anythingToContinue();
-
     }
 
     //City Queries
@@ -215,15 +221,17 @@ public class Queries {
 
         List<Account> accountList = accountRepository.findAll();
         printHeading("Cities");
+        List<String> Accountscities = new ArrayList<>();
         for (Account account : accountList) {
-            System.out.println(account.getCity());
+            if (!Accountscities.contains(account.getCity().toLowerCase()))
+                Accountscities.add(account.getCity().toLowerCase());
         }
+        System.out.println(Accountscities);
 
         String city = inputAutowired.promptTextWithValidation(
                 "\nInsert the City", List.of(Validation.STRING));
 
-        System.out.println("Your count is: " +
-                opportunityRepository.countByAccount_City(city));
+        System.out.println(opportunityRepository.countByAccount_City(city) + " opportunities in "+ city.toUpperCase());
 
         anythingToContinue();
     }
@@ -233,9 +241,12 @@ public class Queries {
 
         List<Account> accountList = accountRepository.findAll();
         printHeading("Cities");
+        List<String> Accountscities = new ArrayList<>();
         for (Account account : accountList) {
-            System.out.println(account.getCity());
+            if (!Accountscities.contains(account.getCity().toLowerCase()))
+                Accountscities.add(account.getCity().toLowerCase());
         }
+        System.out.println(Accountscities);
 
         String city = inputAutowired.promptTextWithValidation(
                 "\nInsert the City", List.of(Validation.STRING));
@@ -248,14 +259,14 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_City(OPEN, city));
+            System.out.println(opportunityRepository.countByStatusAndAccount_City(OPEN, city) +
+                    " opportunities OPEN in " + city.toUpperCase());
         } else if (newInput == 2) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_City(CLOSED_WON, city));
+            System.out.println(opportunityRepository.countByStatusAndAccount_City(CLOSED_WON, city)+
+                    " opportunities CLOSED_WON in " + city.toUpperCase());
         } else if (newInput == 3) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_City(CLOSED_LOST, city));
+            System.out.println(opportunityRepository.countByStatusAndAccount_City(CLOSED_LOST, city)+
+                    " opportunities CLOSED_LOST in " + city.toUpperCase());
         }
 
         anythingToContinue();
@@ -271,8 +282,8 @@ public class Queries {
 
         Industry industry = accountMenu.selectIndustry();
 
-        System.out.println("Your count is: " +
-                opportunityRepository.countByAccount_Industry(industry));
+        System.out.println(opportunityRepository.countByAccount_Industry(industry)+
+                " opportunities with industry "+ industry.toString().toUpperCase());
 
         anythingToContinue();
 
@@ -294,14 +305,14 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Industry(OPEN, industry));
+            System.out.println(opportunityRepository.countByStatusAndAccount_Industry(OPEN, industry) +
+                    " opportunities OPEN with industry "+ industry.toString().toUpperCase());
         } else if (newInput == 2) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Industry(CLOSED_WON, industry));
+            System.out.println(opportunityRepository.countByStatusAndAccount_Industry(CLOSED_WON, industry)+
+                    " opportunities CLOSED_WON with industry "+ industry.toString().toUpperCase());
         } else if (newInput == 3) {
-            System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Industry(CLOSED_LOST, industry));
+            System.out.println(opportunityRepository.countByStatusAndAccount_Industry(CLOSED_LOST, industry)+
+                    " opportunities CLOSED_LOST with industry "+ industry.toString().toUpperCase());
         }
 
         anythingToContinue();

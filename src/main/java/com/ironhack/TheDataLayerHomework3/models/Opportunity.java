@@ -56,11 +56,11 @@ public class Opportunity {
     @Override
     public String toString() {
         return ((char) 27 + "[36m" + "\n\tOpportunity ID: %s " + (char) 27 + "[39m" +
-                "\n Product: %s, " +
-                "\n Quantity : %s, " +
-                "\n Status: %s, " +
-                "\n Opportunity's Sales Rep:  %s" +
-                "\n Decision Maker: %s").formatted(opportunityId, product.toString().toLowerCase(), quantity,
+                "\n\t Product: %s, " +
+                "\n\t Quantity : %s, " +
+                "\n\t Status: %s, " +
+                "\n\t Opportunity's Sales Rep:  \n%s" +
+                "\n\t Decision Maker: %s").formatted(opportunityId, product.toString().toLowerCase(), quantity,
                 status.toString().toLowerCase(), salesRep, decisionMaker);
     }
 

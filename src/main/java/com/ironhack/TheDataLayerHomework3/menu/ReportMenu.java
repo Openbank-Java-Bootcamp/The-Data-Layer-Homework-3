@@ -98,7 +98,7 @@ public class ReportMenu {
                     //TODO TODO
                             "\n(1) Report Opportunity by City" +
                             "\n(2) Report Opportunity Status by City" +
-                            "\n(99) Go Back", 99);
+                            "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.reportOpportunityByCity();
             else if (input == 2 ) queries.reportOpportunityByStatusAndCity();
