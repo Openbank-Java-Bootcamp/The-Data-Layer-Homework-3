@@ -2,9 +2,10 @@ package com.ironhack.TheDataLayerHomework3.models;
 
 import com.ironhack.TheDataLayerHomework3.enums.Product;
 import com.ironhack.TheDataLayerHomework3.enums.Status;
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static com.ironhack.TheDataLayerHomework3.utils.Utils.shortUUID;
 
@@ -37,7 +38,7 @@ public class Opportunity {
         this.opportunityId = shortUUID();
         this.product = product;
         this.quantity = quantity;
-        this.decisionMaker = contact ;
+        this.decisionMaker = contact;
         this.status = status;
         this.salesRep = contact.getSalesRep();
         this.account = contact.getAccount();
@@ -52,17 +53,15 @@ public class Opportunity {
     }
 
 
-
-
     @Override
     public String toString() {
         return ((char) 27 + "[36m" + "\n\tOpportunity ID: %s " + (char) 27 + "[39m" +
                 "\n Product: %s, " +
                 "\n Quantity : %s, " +
                 "\n Status: %s, " +
-                "\n Decision Maker: %s" +
-                "\n\t  %s").formatted(opportunityId, product.toString().toLowerCase(), quantity,
-                status.toString().toLowerCase(), decisionMaker, salesRep);
+                "\n Opportunity's Sales Rep:  %s" +
+                "\n Decision Maker: %s").formatted(opportunityId, product.toString().toLowerCase(), quantity,
+                status.toString().toLowerCase(), salesRep, decisionMaker);
     }
 
 }

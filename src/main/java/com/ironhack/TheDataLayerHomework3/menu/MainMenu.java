@@ -35,7 +35,7 @@ public class MainMenu {
                     "\n(2) Lead Menu " +
                     "\n(3) Opportunity Status Menu " +
                     "\n(4) Report Menu " +
-                    "\n(99) Exit", 99);
+                    "\n\n(99) Exit", 99);
 
             if (input == 1) salesRepMenu.menu();
             if (input == 2) leadMenu.menu();

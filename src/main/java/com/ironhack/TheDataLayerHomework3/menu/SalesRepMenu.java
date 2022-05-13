@@ -38,7 +38,7 @@ public class SalesRepMenu {
         while (input != 99) {
             clearConsole();
             input = inputAutowired.promptIntWithValidation("(1) New Sales Rep \n(2) Show all Sales Reps " +
-                    "\n(99) Go Back", 99);
+                    "\n\n(99) Go Back", 99);
 
             if (input == 1) createNewSalesRep();
             else if (input == 2) showAllSalesRep();

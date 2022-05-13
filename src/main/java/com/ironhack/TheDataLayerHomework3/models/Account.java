@@ -28,11 +28,13 @@ public class Account {
     String city;
     String country;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "account")
     List<Contact> contactList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     List<Opportunity> opportunityList = new ArrayList<>();
+
+//todo    Integer ammountOpportunities;
 
     public Account(Industry industry, int employeeCount, String city, String country) {
         this.industry = industry;

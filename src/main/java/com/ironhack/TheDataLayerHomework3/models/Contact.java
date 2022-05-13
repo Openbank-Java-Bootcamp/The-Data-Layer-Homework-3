@@ -58,7 +58,6 @@ public class Contact {
                 "\n\t  Name: %s," +
                 "\n\t  Phone Number: %s," +
                 "\n\t  Email: %s," +
-                "\n\t  Company Name: %s" +
-                "\n\t  %s").formatted(contactId, name, phoneNumber, email, companyName, salesRep);
+                "\n\t  Company Name: %s").formatted(contactId, name, phoneNumber, email, companyName);
     }
 }

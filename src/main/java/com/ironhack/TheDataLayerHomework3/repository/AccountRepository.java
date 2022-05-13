@@ -8,18 +8,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepository  extends JpaRepository<Account, String> {
 
-
-
-    //The mean number of Opportunities associated with an Account can be displayed by typing “Mean Opps per Account”
-    //The median number of Opportunities associated with an Account can be displayed by typing “Median Opps per Account”
-    //The maximum number of Opportunities associated with an Account can be displayed by typing “Max Opps per Account”
-    //The minimum number of Opportunities associated with an Account can be displayed by typing “Min Opps per Account”
-    @Query(value = "SELECT MAX(employee_count) FROM account")
+    @Query(value = "SELECT MAX(employee_count) FROM account", nativeQuery = true)
     Integer maxEmployee();
-    @Query(value = "SELECT MIN(employee_count) FROM account")
+
+    @Query(value = "SELECT MIN(employee_count) FROM account", nativeQuery = true)
     Integer minEmployee();
 
-    @Query(value = "SELECT AVG(employee_count) FROM account")
+    @Query(value = "SELECT AVG(employee_count) FROM account", nativeQuery = true)
     Integer avgEmployee();
 
     @Query(value = "SET @row_index := -1;\n" +
@@ -31,7 +26,7 @@ public interface AccountRepository  extends JpaRepository<Account, String> {
             "                    ORDER BY employee_count\n" +
             "    ) AS subq\n" +
             "    WHERE subq.row_index\n" +
-            "    IN (FLOOR(@row_index / 2) , CEIL(@row_index / 2))")
+            "    IN (FLOOR(@row_index / 2) , CEIL(@row_index / 2))", nativeQuery = true)
     Integer medianEmployee();
 
 }

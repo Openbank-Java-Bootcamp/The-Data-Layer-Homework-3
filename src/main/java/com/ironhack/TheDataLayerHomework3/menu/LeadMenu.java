@@ -46,8 +46,11 @@ public class LeadMenu {
 
         while (input != 99) {
             clearConsole();
-            input = inputAutowired.promptIntWithValidation("(1) Create New Lead \n(2) Show all Leads \n(3) Lookup Lead " +
-                    "\n(4) Convert Lead \n(99) Go Back", 99);
+            input = inputAutowired.promptIntWithValidation("(1) Create New Lead " +
+                    "\n(2) Show all Leads " +
+                    "\n(3) Lookup Lead " +
+                    "\n(4) Convert Lead " +
+                    "\n\n(99) Go Back", 99);
 
             if (input == 1) createNewLead();
             else if (input == 2) showLeads();

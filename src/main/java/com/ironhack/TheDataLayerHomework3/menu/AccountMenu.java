@@ -60,7 +60,7 @@ public class AccountMenu {
 
 
 
-    private Industry selectIndustry() {
+    public Industry selectIndustry() {
         String typesAccountMenu = "\n (1) Produce \n (2) Ecommerce \n (3) Manufacturing \n (4) Medical \n (5) Other";
         Industry industry = null;
         int input = inputAutowired.promptIntWithValidation("Select type of industry" + typesAccountMenu, 5);

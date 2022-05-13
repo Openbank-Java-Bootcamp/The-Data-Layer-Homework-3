@@ -3,6 +3,7 @@ package com.ironhack.TheDataLayerHomework3.queries;
 import com.ironhack.TheDataLayerHomework3.enums.Industry;
 import com.ironhack.TheDataLayerHomework3.enums.Product;
 import com.ironhack.TheDataLayerHomework3.enums.Validation;
+import com.ironhack.TheDataLayerHomework3.menu.AccountMenu;
 import com.ironhack.TheDataLayerHomework3.menu.SalesRepMenu;
 import com.ironhack.TheDataLayerHomework3.models.Account;
 import com.ironhack.TheDataLayerHomework3.models.SalesRep;
@@ -27,23 +28,25 @@ public class Queries {
     final private AccountRepository accountRepository;
     final private SalesRepMenu salesRepMenu;
 
-    public Queries(Input inputAutowired, LeadRepository leadRepository, OpportunityRepository opportunityRepository, AccountRepository accountRepository, SalesRepMenu salesRepMenu) {
+    final private AccountMenu accountMenu;
+
+    public Queries(Input inputAutowired, LeadRepository leadRepository, OpportunityRepository opportunityRepository, AccountRepository accountRepository, SalesRepMenu salesRepMenu, AccountMenu accountMenu) {
         this.inputAutowired = inputAutowired;
         this.leadRepository = leadRepository;
         this.opportunityRepository = opportunityRepository;
         this.accountRepository = accountRepository;
         this.salesRepMenu = salesRepMenu;
+        this.accountMenu = accountMenu;
     }
-
 
 
     //SalesRep Queries
 
-    public void reportLeadBySalesRep(){
+    public void reportLeadBySalesRep() {
         clearConsole();
         SalesRep salesRep = salesRepMenu.getSalesRepFromInputId();
 
-        System.out.println(salesRep.getName()+" has "+ leadRepository.countBySalesRep(salesRep) + " Leads");
+        System.out.println(salesRep.getName() + " has " + leadRepository.countBySalesRep(salesRep) + " Leads");
 
         anythingToContinue();
     }
@@ -52,7 +55,7 @@ public class Queries {
         clearConsole();
         SalesRep salesRep = salesRepMenu.getSalesRepFromInputId();
 
-        System.out.println(salesRep.getName()+" has "+ opportunityRepository.countBySalesRep(salesRep) + " Opportunities");
+        System.out.println(salesRep.getName() + " has " + opportunityRepository.countBySalesRep(salesRep) + " Opportunities");
 
         anythingToContinue();
     }
@@ -68,22 +71,20 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countBySalesRepAndStatus(salesRep, OPEN));
         } else if (newInput == 2) {
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_WON));
         } else if (newInput == 3) {
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countBySalesRepAndStatus(salesRep, CLOSED_LOST));
         }
 
         anythingToContinue();
     }
 
-
     //Product Queries
-
 
     public void reportOpportunityByStatusAndProduct() {
         clearConsole();
@@ -111,14 +112,14 @@ public class Queries {
 
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countByProductAndStatus(product, OPEN));
 
         } else if (newInput == 2) {
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countByProductAndStatus(product, CLOSED_WON));
         } else if (newInput == 3) {
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countByProductAndStatus(product, CLOSED_LOST));
         }
         anythingToContinue();
@@ -137,21 +138,19 @@ public class Queries {
         int input = inputAutowired.promptIntWithValidation("-> ", 3);
         if (input == 1) {
             product = Product.HYBRID;
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countByProduct(product));
         } else if (input == 2) {
             product = Product.FLATBED;
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countByProduct(product));
         } else if (input == 3) {
             product = Product.BOX;
-            System.out.println( "Your count is: "
+            System.out.println("Your count is: "
                     + opportunityRepository.countByProduct(product));
         }
         anythingToContinue();
     }
-
-
 
     // Country Queries
 
@@ -161,18 +160,15 @@ public class Queries {
         List<Account> accountList = accountRepository.findAll();
         printHeading("Countries");
         for (Account account : accountList) {
-            System.out.println("Account: "+ account.getAccountId() );
+            System.out.println("Account: " + account.getAccountId());
             System.out.println(account.getCountry());
         }
 
-        String accountId = inputAutowired.promptTextWithValidation(
-                "Insert the Account ID", List.of(Validation.ACCOUNT));
-
-        Account foundAccount = accountRepository.findById(accountId).get();
-        String country = foundAccount.getCountry();
+        String country = inputAutowired.promptTextWithValidation(
+                "\nInsert the Country", List.of(Validation.COUNTRY));
 
         System.out.println("Your count is: " +
-                opportunityRepository.countByAccount_Country(accountId, country));
+                opportunityRepository.countByAccount_Country(country));
 
         anythingToContinue();
     }
@@ -181,17 +177,13 @@ public class Queries {
         clearConsole();
 
         List<Account> accountList = accountRepository.findAll();
-        System.out.println("Countries");
+        printHeading("Countries");
         for (Account account : accountList) {
-            System.out.println("Account: "+ account.getAccountId() );
             System.out.println(account.getCountry());
         }
 
-        String accountId = inputAutowired.promptTextWithValidation(
-                "Insert the Account ID", List.of(Validation.ACCOUNT));
-
-        Account foundAccount = accountRepository.findById(accountId).get();
-        String country = foundAccount.getCountry();
+        String country = inputAutowired.promptTextWithValidation(
+                "\nInsert the Country", List.of(Validation.COUNTRY));
 
         printHeading(" \n Choose the Status to report " + " \n");
         System.out.println("(1) OPEN");
@@ -202,19 +194,18 @@ public class Queries {
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Country(accountId, country,  OPEN));
+                    opportunityRepository.countByStatusAndAccount_Country(OPEN, country));
         } else if (newInput == 2) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Country(accountId, country, CLOSED_WON));
+                    opportunityRepository.countByStatusAndAccount_Country(CLOSED_WON, country));
         } else if (newInput == 3) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Country(accountId, country, CLOSED_LOST));
+                    opportunityRepository.countByStatusAndAccount_Country(CLOSED_LOST, country));
         }
 
         anythingToContinue();
 
     }
-
 
     //City Queries
 
@@ -224,18 +215,14 @@ public class Queries {
         List<Account> accountList = accountRepository.findAll();
         printHeading("Cities");
         for (Account account : accountList) {
-            System.out.println("Account: "+ account.getAccountId() );
             System.out.println(account.getCity());
         }
 
-        String accountId = inputAutowired.promptTextWithValidation(
-                "Insert the Account ID", List.of(Validation.ACCOUNT));
-
-        Account foundAccount = accountRepository.findById(accountId).get();
-        String city = foundAccount.getCity();
+        String city = inputAutowired.promptTextWithValidation(
+                "\nInsert the City", List.of(Validation.STRING));
 
         System.out.println("Your count is: " +
-                opportunityRepository.countByAccount_City(accountId, city));
+                opportunityRepository.countByAccount_City(city));
 
         anythingToContinue();
     }
@@ -244,18 +231,13 @@ public class Queries {
         clearConsole();
 
         List<Account> accountList = accountRepository.findAll();
-        System.out.println("Cities");
+        printHeading("Cities");
         for (Account account : accountList) {
-            System.out.println("Account: "+ account );
             System.out.println(account.getCity());
         }
 
-
-        String accountId = inputAutowired.promptTextWithValidation(
-                "Insert the Account ID", List.of(Validation.ACCOUNT));
-
-        Account foundAccount = accountRepository.findById(accountId).get();
-        String city = foundAccount.getCity();
+        String city = inputAutowired.promptTextWithValidation(
+                "\nInsert the City", List.of(Validation.STRING));
 
         printHeading(" \n Choose the Status to report " + " \n");
         System.out.println("(1) OPEN");
@@ -266,40 +248,30 @@ public class Queries {
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_City(accountId, city,  OPEN));
+                    opportunityRepository.countByStatusAndAccount_City(OPEN, city));
         } else if (newInput == 2) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_City(accountId, city, CLOSED_WON));
+                    opportunityRepository.countByStatusAndAccount_City(CLOSED_WON, city));
         } else if (newInput == 3) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_City(accountId, city, CLOSED_LOST));
+                    opportunityRepository.countByStatusAndAccount_City(CLOSED_LOST, city));
         }
 
         anythingToContinue();
     }
 
-
     //Industry queries
-
 
     public void reportOpportunityByIndustry() {
         clearConsole();
 
         List<Account> accountList = accountRepository.findAll();
         printHeading("Industries");
-        for (Account account : accountList) {
-            System.out.println("Account: "+ account.getAccountId() );
-            System.out.println(account.getIndustry());
-        }
 
-        String accountId = inputAutowired.promptTextWithValidation(
-                "Insert the Account ID", List.of(Validation.ACCOUNT));
-
-        Account foundAccount = accountRepository.findById(accountId).get();
-        Industry industry = foundAccount.getIndustry();
+        Industry industry = accountMenu.selectIndustry();
 
         System.out.println("Your count is: " +
-                opportunityRepository.countByAccount_Industry(accountId, industry));
+                opportunityRepository.countByAccount_Industry(industry));
 
         anythingToContinue();
 
@@ -309,18 +281,9 @@ public class Queries {
         clearConsole();
 
         List<Account> accountList = accountRepository.findAll();
-        System.out.println("Industries");
-        for (Account account : accountList) {
-            System.out.println("Account: "+ account );
-            System.out.println(account.getIndustry());
-        }
+        printHeading("Industries");
 
-
-        String accountId = inputAutowired.promptTextWithValidation(
-                "Insert the Account ID", List.of(Validation.ACCOUNT));
-
-        Account foundAccount = accountRepository.findById(accountId).get();
-        Industry industry = foundAccount.getIndustry();
+        Industry industry = accountMenu.selectIndustry();
 
         printHeading(" \n Choose the Status to report " + " \n");
         System.out.println("(1) OPEN");
@@ -331,75 +294,93 @@ public class Queries {
         Integer newInput = inputAutowired.promptIntWithValidation("-> ", 3);
         if (newInput == 1) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Industry(accountId, industry,  OPEN));
+                    opportunityRepository.countByStatusAndAccount_Industry(OPEN, industry));
         } else if (newInput == 2) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Industry(accountId, industry, CLOSED_WON));
+                    opportunityRepository.countByStatusAndAccount_Industry(CLOSED_WON, industry));
         } else if (newInput == 3) {
             System.out.println("Your count is: " +
-                    opportunityRepository.countByStatusAndAccount_Industry(accountId, industry, CLOSED_LOST));
+                    opportunityRepository.countByStatusAndAccount_Industry(CLOSED_LOST, industry));
         }
 
         anythingToContinue();
     }
 
-
-
-
-
-
+    //EmployeeCount States
 
     public void minEmployeeCount() {
+        clearConsole();
         System.out.println("The minimum Employee count is: " + accountRepository.minEmployee());
+
+        anythingToContinue();
     }
 
     public void maxEmployeeCount() {
-        System.out.println("The minimum Employee count is: " + accountRepository.maxEmployee());
+        clearConsole();
+        System.out.println("The maximum Employee count is: " + accountRepository.maxEmployee());
+        anythingToContinue();
     }
 
-    public void medianEmployeeCount()  {
-        System.out.println("The minimum Employee count is: " + accountRepository.avgEmployee());
+    public void medianEmployeeCount() {
+        clearConsole();
+        System.out.println("The median Employee count is: " + accountRepository.medianEmployee());
+        anythingToContinue();
     }
 
     public void meanEmployeeCount() {
-        System.out.println("The minimum Employee count is: " + accountRepository.avgEmployee());
+        clearConsole();
+        System.out.println("The mean Employee count is: " + accountRepository.avgEmployee());
+        anythingToContinue();
     }
 
-
-
+    //Quantity States
 
     public void minQuantityProductCount() {
+        clearConsole();
         System.out.println("The minimum product quantity is: " + opportunityRepository.minQuantity());
+        anythingToContinue();
     }
 
     public void maxQuantityProductCount() {
+        clearConsole();
         System.out.println("The maximum product quantity is: " + opportunityRepository.maxQuantity());
+        anythingToContinue();
     }
 
     public void medianQuantityProductCount() {
-        System.out.println("The maximum product quantity is: " + opportunityRepository.medianQuantity());
+        clearConsole();
+        System.out.println("The median product quantity is: " + opportunityRepository.medianQuantity());
+        anythingToContinue();
     }
 
     public void meanQuantityProductCount() {
-        System.out.println("The mean product quantity is: " +opportunityRepository.avgQuantity());
+        clearConsole();
+        System.out.println("The mean product quantity is: " + opportunityRepository.avgQuantity());
+        anythingToContinue();
     }
 
-
+    //Opportunity States
 
     public void minOpportunityByAccountCount() {
+        clearConsole();
         System.out.println("The minimum opportunity count is: " + opportunityRepository.minOpportunities());
+        anythingToContinue();
     }
 
     public void maxOpportunityByAccountCount() {
+        clearConsole();
         System.out.println("The maximum opportunity count is: " + opportunityRepository.maxOpportunities());
+        anythingToContinue();
     }
 
-
     public void medianOpportunityByAccountCount() {
+        clearConsole();
+        anythingToContinue();
     }
 
     public void meanOpportunityByAccountCount() {
+        clearConsole();
+        anythingToContinue();
     }
-
 
 }

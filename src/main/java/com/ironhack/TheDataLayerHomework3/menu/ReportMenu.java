@@ -39,7 +39,7 @@ public class ReportMenu {
                             "\n(6) Employee Count States" +
                             "\n(7) Quantity States" +
                              "\n(8) Opportunity States" +
-                            "\n(99) Go Back", 99);
+                            "\n\n(99) Go Back", 99);
 
 
             if (input == 1 ) bySalesRepMenu();
@@ -61,7 +61,8 @@ public class ReportMenu {
             input = inputAutowired.promptIntWithValidation(
                     "\n(1) Report Lead by SalesRep" +
                     "\n(2) Report Opportunity by SalesRep" +
-                    "\n(3) Report Opportunity Status by SalesRep" + "\n(99) Go Back", 99);
+                    "\n(3) Report Opportunity Status by SalesRep" +
+                    "\n\n(99) Go Back", 99);
 
 
             if (input == 1 ) queries.reportLeadBySalesRep();
@@ -80,7 +81,7 @@ public class ReportMenu {
                     //TODO TODO
                             "\n(1) Report Opportunity by Product" +
                             "\n(2) Report Opportunity Status by Product" +
-                            "\n(99) Go Back", 99);
+                            "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.reportOpportunityByProduct();
             else if (input == 2 ) queries.reportOpportunityByStatusAndProduct();
@@ -96,7 +97,7 @@ public class ReportMenu {
             input = inputAutowired.promptIntWithValidation(
                     //TODO TODO
                             "\n(1) Report Opportunity by City" +
-                            "\n(2)  Report Opportunity Status by City" +
+                            "\n(2) Report Opportunity Status by City" +
                             "\n(99) Go Back", 99);
 
             if (input == 1 ) queries.reportOpportunityByCity();
@@ -113,8 +114,8 @@ public class ReportMenu {
             input = inputAutowired.promptIntWithValidation(
                     //TODO TODO
                             "\n(1) Report Opportunity by Country" +
-                            "\n(2)  Report Opportunity Status by Country" +
-                            "\n(99) Go Back", 99);
+                            "\n(2) Report Opportunity Status by Country" +
+                            "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.reportOpportunityByCountry();
             else if (input == 2 ) queries.reportOpportunityByStatusAndCountry();
@@ -129,8 +130,8 @@ public class ReportMenu {
             input = inputAutowired.promptIntWithValidation(
                     //TODO TODO
                             "\n(1) Report Opportunity by Industry" +
-                            "\n(2)  Report Opportunity Status by Industry" +
-                            "\n(99) Go Back", 99);
+                            "\n(2) Report Opportunity Status by Industry" +
+                            "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.reportOpportunityByIndustry();
             else if (input == 2 ) queries.reportOpportunityByStatusAndIndustry();
@@ -144,11 +145,11 @@ public class ReportMenu {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
                     //TODO TODO
-                            "\n(1) Mean Employee Count" +
+                            "\n(1)  Mean Employee Count" +
                             "\n(2)  Median Employee Count" +
                             "\n(3)  Max Employee Count" +
                             "\n(4)  Min Employee Count" +
-                             "\n(99) Go Back", 99);
+                             "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.meanEmployeeCount();
             else if (input == 2 ) queries.medianEmployeeCount();
@@ -164,11 +165,11 @@ public class ReportMenu {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
                     //TODO TODO
-                    "\n(1) Mean Quantity Product Count" +
+                    "\n(1)  Mean Quantity Product Count" +
                             "\n(2)  Median Quantity Product Count" +
                             "\n(3)  Max Quantity Product Count" +
                             "\n(4)  Min Quantity Product Count" +
-                            "\n(99) Go Back", 99);
+                            "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.meanQuantityProductCount();
             else if (input == 2 ) queries.medianQuantityProductCount();
@@ -184,11 +185,11 @@ public class ReportMenu {
             clearConsole();
             input = inputAutowired.promptIntWithValidation(
                     //TODO TODO
-                    "\n(1) Mean Opportunity by Account Count" +
+                    "\n(1)  Mean Opportunity by Account Count" +
                             "\n(2)  Median Opportunity by Account Count" +
                             "\n(3)  Max Opportunity by Account Count" +
                             "\n(4)  Min Opportunity by Account Count" +
-                            "\n(99) Go Back", 99);
+                            "\n\n(99) Go Back", 99);
 
             if (input == 1 ) queries.meanOpportunityByAccountCount();
             else if (input == 2 ) queries.medianOpportunityByAccountCount();
